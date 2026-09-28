@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#111827">
-<meta name="description" content="Free local Resume Builder with ATS readiness checker and job description keyword matching.">
+<meta name="description" content="Professional Resume Builder with ATS readiness checker, job matching and saved resume versions.">
 
 <title>ResumeBuilder AI 2.0</title>
 
@@ -91,6 +91,7 @@ header{
   display:flex;
   align-items:center;
   gap:8px;
+  flex-wrap:wrap;
 }
 
 .btn{
@@ -123,23 +124,21 @@ header{
   color:#bbf7d0;
 }
 
+.btn-warning{
+  border-color:rgba(245,158,11,.35);
+  color:#fde68a;
+}
+
+.btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  transform:none;
+}
+
 /* HERO */
 .hero{
   padding:48px 0 28px;
   text-align:center;
-}
-
-.badge{
-  display:inline-flex;
-  gap:8px;
-  align-items:center;
-  padding:7px 12px;
-  border:1px solid rgba(124,58,237,.35);
-  background:rgba(124,58,237,.1);
-  color:#ddd6fe;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:700;
 }
 
 .hero h1{
@@ -191,6 +190,88 @@ header{
   background:linear-gradient(135deg,var(--primary),var(--primary2));
   border-color:transparent;
   color:white;
+}
+
+/* SAVED RESUMES */
+.saved-panel{
+  margin-bottom:20px;
+}
+
+.saved-head-left{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+
+.saved-count{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.saved-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.saved-card{
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.045);
+  border-radius:14px;
+  padding:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+}
+
+.saved-card.active{
+  border-color:rgba(124,58,237,.55);
+  background:rgba(124,58,237,.08);
+}
+
+.saved-info{
+  min-width:0;
+  flex:1;
+}
+
+.saved-name{
+  font-weight:800;
+  font-size:15px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.saved-meta{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.saved-status{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  margin-top:7px;
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+  border:1px solid rgba(34,197,94,.3);
+  color:#bbf7d0;
+  background:rgba(34,197,94,.07);
+}
+
+.saved-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  justify-content:flex-end;
+}
+
+.saved-actions .small-btn{
+  white-space:nowrap;
 }
 
 /* LAYOUT */
@@ -709,6 +790,162 @@ textarea{
   line-height:1.5;
 }
 
+/* LOCKED NOTICE */
+.locked-notice{
+  display:none;
+  margin:0 0 15px;
+  border:1px solid rgba(34,197,94,.3);
+  background:rgba(34,197,94,.07);
+  color:#bbf7d0;
+  border-radius:12px;
+  padding:12px 14px;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.locked-notice.show{
+  display:block;
+}
+
+/* SAVE STATUS */
+.save-status{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+  color:var(--muted);
+  white-space:nowrap;
+}
+
+.save-status.saved{
+  color:#bbf7d0;
+}
+
+.save-status.unsaved{
+  color:#fde68a;
+}
+
+.save-status.locked{
+  color:#bbf7d0;
+}
+
+/* PRICING */
+.pricing-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:16px;
+}
+
+.price-card{
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.04);
+  border-radius:14px;
+  padding:16px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.price-card:hover{
+  transform:translateY(-1px);
+}
+
+.price-card.selected{
+  border-color:#8b5cf6;
+  background:rgba(124,58,237,.1);
+  box-shadow:0 0 0 2px rgba(124,58,237,.12);
+}
+
+.price-card-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:flex-start;
+}
+
+.price-name{
+  font-weight:900;
+  font-size:15px;
+}
+
+.price-value{
+  font-weight:900;
+  font-size:20px;
+}
+
+.price-card ul{
+  padding-left:18px;
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+}
+
+.payment-note{
+  margin-top:12px;
+  padding:11px 12px;
+  border:1px dashed rgba(167,139,250,.4);
+  border-radius:10px;
+  color:#cbd5e1;
+  background:rgba(124,58,237,.05);
+  font-size:12px;
+  line-height:1.5;
+}
+
+/* MODAL */
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(0,0,0,.68);
+  backdrop-filter:blur(8px);
+}
+
+.modal-backdrop.show{
+  display:flex;
+}
+
+.modal{
+  width:min(520px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#111827;
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:0 30px 90px rgba(0,0,0,.45);
+}
+
+.modal-head{
+  padding:18px 20px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.modal-head h3{
+  margin:0;
+  font-size:18px;
+}
+
+.modal-body{
+  padding:20px;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:18px;
+  padding-top:15px;
+  border-top:1px solid var(--border);
+}
+
 /* FOOTER */
 footer{
   text-align:center;
@@ -731,7 +968,7 @@ footer{
   transform:translate(-50%,20px);
   opacity:0;
   pointer-events:none;
-  z-index:100;
+  z-index:300;
   background:#111827;
   border:1px solid var(--border);
   color:#fff;
@@ -740,6 +977,8 @@ footer{
   box-shadow:var(--shadow);
   transition:.25s;
   font-size:13px;
+  max-width:min(90vw,500px);
+  text-align:center;
 }
 
 .toast.show{
@@ -804,7 +1043,8 @@ footer{
 
 @media(max-width:650px){
   .grid,
-  .grid-3{
+  .grid-3,
+  .pricing-grid{
     grid-template-columns:1fr;
   }
 
@@ -836,6 +1076,16 @@ footer{
   .header-actions .btn span{
     display:none;
   }
+
+  .saved-card{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .saved-actions{
+    width:100%;
+    justify-content:flex-start;
+  }
 }
 </style>
 </head>
@@ -844,30 +1094,65 @@ footer{
 
 <header>
   <div class="container header-inner">
+
     <div class="brand">
       <div class="brand-icon">📄</div>
       <div>ResumeBuilder AI</div>
     </div>
 
     <div class="header-actions">
-      <button class="btn" onclick="toggleLanguage()">🌐 <span id="langBtn">हिंदी</span></button>
-      <button class="btn btn-danger" onclick="resetAll()">↺ <span id="resetBtn">Reset</span></button>
+      <button class="btn" onclick="toggleLanguage()">
+        🌐 <span id="langBtn">हिंदी</span>
+      </button>
+
+      <button class="btn" onclick="createNewResume()">
+        ＋ <span id="newResumeBtn">New Resume</span>
+      </button>
+
+      <button class="btn btn-danger" onclick="resetEditor()">
+        ↺ <span id="resetBtn">Reset</span>
+      </button>
     </div>
+
   </div>
 </header>
 
 <main class="container">
 
   <section class="hero">
-    <div class="badge">⚡ Free • Local • No API Required</div>
+
     <h1>
       <span id="heroA">Build a</span>
       <span class="gradient-text" id="heroB">Job-Ready Resume</span>
     </h1>
+
     <p id="heroText">
       Create a clean, ATS-friendly resume, check your resume readiness,
       and match it with a job description — directly in your browser.
     </p>
+
+  </section>
+
+  <!-- SAVED RESUMES -->
+  <section class="panel saved-panel">
+
+    <div class="panel-head">
+
+      <div class="saved-head-left">
+        <h2 class="panel-title" id="savedTitle">My Resumes</h2>
+        <div class="saved-count" id="savedCount">0 saved resumes</div>
+      </div>
+
+      <button class="btn btn-primary" onclick="createNewResume()">
+        ＋ <span id="savedNewBtn">New Resume</span>
+      </button>
+
+    </div>
+
+    <div class="panel-body">
+      <div id="savedResumeList"></div>
+    </div>
+
   </section>
 
   <div class="steps" id="steps"></div>
@@ -878,20 +1163,43 @@ footer{
     <section class="panel">
 
       <div class="panel-head">
+
         <h2 class="panel-title" id="formTitle">Resume Builder</h2>
-        <span class="badge" id="stepCounter">1 / 8</span>
+
+        <div style="display:flex;align-items:center;gap:10px">
+
+          <span class="save-status unsaved" id="saveStatus">
+            ● Unsaved
+          </span>
+
+          <span class="step" id="stepCounter">1 / 8</span>
+
+        </div>
+
       </div>
 
       <div class="panel-body">
 
+        <div class="locked-notice" id="lockedNotice">
+          🔒 <strong>Finalized Resume:</strong>
+          This resume is locked and cannot be edited.
+          You can still view, download PDF, share, or delete it.
+          To create another version, choose <strong>New Resume</strong>.
+        </div>
+
         <!-- STEP 0 -->
         <section class="form-section active" id="section-0">
-          <h2 class="section-title" data-i18n="personalTitle">Personal Information</h2>
+
+          <h2 class="section-title" data-i18n="personalTitle">
+            Personal Information
+          </h2>
+
           <p class="section-subtitle" data-i18n="personalSub">
             Add the basic information employers need to contact you.
           </p>
 
           <div class="grid">
+
             <div class="field">
               <label>Full Name <span class="required">*</span></label>
               <input id="name" maxlength="80" placeholder="e.g. Rahul Sharma">
@@ -931,49 +1239,72 @@ footer{
               <label>Professional Title</label>
               <input id="headline" maxlength="120" placeholder="Software Developer | JavaScript | React">
             </div>
+
           </div>
 
           <div class="tip">
-            💡 <strong>Tip:</strong> Use a professional email address and keep your contact details simple.
+            💡 <strong>Tip:</strong>
+            Use a professional email address and keep your contact details simple.
           </div>
+
         </section>
 
         <!-- STEP 1 -->
         <section class="form-section" id="section-1">
+
           <h2 class="section-title">Professional Summary</h2>
+
           <p class="section-subtitle">
             Write a short summary focused on your role, skills and relevant experience.
           </p>
 
           <div class="field">
+
             <label>Summary</label>
+
             <textarea id="summary" maxlength="1000"
               placeholder="Example: Frontend developer with experience building responsive web interfaces using HTML, CSS and JavaScript..."></textarea>
-            <div class="hint"><span id="summaryCount">0</span>/1000 characters</div>
+
+            <div class="hint">
+              <span id="summaryCount">0</span>/1000 characters
+            </div>
+
           </div>
 
           <div class="entry-card" style="margin-top:14px">
+
             <div class="entry-head">
               <strong>Local Summary Helper</strong>
             </div>
 
             <div class="grid">
+
               <div class="field">
+
                 <label>Years of Experience</label>
+
                 <select id="summaryExperience">
+
                   <option value="0">Fresher / Student</option>
                   <option value="1">1 year</option>
                   <option value="2">2 years</option>
                   <option value="3">3 years</option>
                   <option value="5">5+ years</option>
                   <option value="8">8+ years</option>
+
                 </select>
+
               </div>
 
               <div class="field">
+
                 <label>Primary Strength</label>
-                <input id="summaryStrength" placeholder="e.g. React development">
+
+                <input id="summaryStrength"
+                  placeholder="e.g. React development">
+
               </div>
+
             </div>
 
             <button class="add-btn" onclick="generateSummarySuggestion()">
@@ -981,122 +1312,201 @@ footer{
             </button>
 
             <div class="hint" style="margin-top:8px">
-              Suggestion uses only the information you provide. It does not invent achievements.
+              Suggestion uses only the information you provide.
+              It does not invent achievements.
             </div>
+
           </div>
+
         </section>
 
         <!-- STEP 2 -->
         <section class="form-section" id="section-2">
+
           <h2 class="section-title">Work Experience</h2>
+
           <p class="section-subtitle">
-            Add jobs, internships or relevant practical experience. Fresher? You can leave this empty.
+            Add jobs, internships or relevant practical experience.
+            Fresher? You can leave this empty.
           </p>
 
           <div id="experienceList" class="entry-list"></div>
-          <button class="add-btn" onclick="addExperience()">＋ Add Experience</button>
+
+          <button class="add-btn" onclick="addExperience()">
+            ＋ Add Experience
+          </button>
 
           <div class="tip">
-            💡 Strong bullets usually describe <strong>action + task + result</strong>.
+            💡 Strong bullets usually describe
+            <strong>action + task + result</strong>.
             Add numbers only when they are genuine.
           </div>
+
         </section>
 
         <!-- STEP 3 -->
         <section class="form-section" id="section-3">
+
           <h2 class="section-title">Education</h2>
+
           <p class="section-subtitle">
             Add your latest or most relevant education first.
           </p>
 
           <div id="educationList" class="entry-list"></div>
-          <button class="add-btn" onclick="addEducation()">＋ Add Education</button>
+
+          <button class="add-btn" onclick="addEducation()">
+            ＋ Add Education
+          </button>
+
         </section>
 
         <!-- STEP 4 -->
         <section class="form-section" id="section-4">
+
           <h2 class="section-title">Skills & Keywords</h2>
+
           <p class="section-subtitle">
-            Add skills relevant to the roles you want. Avoid keyword stuffing.
+            Add skills relevant to the roles you want.
+            Avoid keyword stuffing.
           </p>
 
           <div class="skill-input-row">
-            <input id="skillInput" maxlength="50" placeholder="e.g. JavaScript">
-            <button class="btn btn-primary" onclick="addSkill()">Add</button>
+
+            <input id="skillInput"
+              maxlength="50"
+              placeholder="e.g. JavaScript">
+
+            <button class="btn btn-primary"
+              onclick="addSkill()">
+              Add
+            </button>
+
           </div>
 
           <div class="skill-list" id="skillList"></div>
 
           <div class="entry-card" style="margin-top:18px">
+
             <div class="entry-head">
               <strong>Quick Skill Suggestions</strong>
             </div>
 
             <div class="skill-list" id="suggestedSkills"></div>
+
           </div>
 
           <div class="tip">
-            💡 Only add skills you actually know. Matching a keyword is useful only when you can support it with real knowledge or experience.
+            💡 Only add skills you actually know.
+            Matching a keyword is useful only when you can support it
+            with real knowledge or experience.
           </div>
+
         </section>
 
         <!-- STEP 5 -->
         <section class="form-section" id="section-5">
-          <h2 class="section-title">Projects & Certifications</h2>
+
+          <h2 class="section-title">
+            Projects & Certifications
+          </h2>
+
           <p class="section-subtitle">
             Projects are especially useful for students and freshers.
           </p>
 
-          <h3 style="margin:0 0 12px">Projects</h3>
-          <div id="projectList" class="entry-list"></div>
-          <button class="add-btn" onclick="addProject()">＋ Add Project</button>
+          <h3 style="margin:0 0 12px">
+            Projects
+          </h3>
 
-          <h3 style="margin:24px 0 12px">Certifications</h3>
+          <div id="projectList" class="entry-list"></div>
+
+          <button class="add-btn" onclick="addProject()">
+            ＋ Add Project
+          </button>
+
+          <h3 style="margin:24px 0 12px">
+            Certifications
+          </h3>
+
           <div id="certificationList" class="entry-list"></div>
-          <button class="add-btn" onclick="addCertification()">＋ Add Certification</button>
+
+          <button class="add-btn" onclick="addCertification()">
+            ＋ Add Certification
+          </button>
+
         </section>
 
         <!-- STEP 6 -->
         <section class="form-section" id="section-6">
-          <h2 class="section-title">Achievements & Languages</h2>
+
+          <h2 class="section-title">
+            Achievements & Languages
+          </h2>
+
           <p class="section-subtitle">
             Add genuine achievements, awards and languages relevant to your application.
           </p>
 
           <div class="field">
+
             <label>Achievements</label>
-            <textarea id="achievements" maxlength="1500"
+
+            <textarea id="achievements"
+              maxlength="1500"
               placeholder="One achievement per line&#10;• Won college hackathon&#10;• Led a 4-member project team&#10;• Published a project..."></textarea>
+
           </div>
 
           <div class="field" style="margin-top:15px">
+
             <label>Languages</label>
-            <input id="languages" maxlength="300"
+
+            <input id="languages"
+              maxlength="300"
               placeholder="Hindi — Native, English — Professional">
+
           </div>
 
           <div class="field" style="margin-top:15px">
+
             <label>Additional Information</label>
-            <textarea id="additional" maxlength="1000"
+
+            <textarea id="additional"
+              maxlength="1000"
               placeholder="Optional: publications, volunteer work, interests, etc."></textarea>
+
           </div>
+
         </section>
 
         <!-- STEP 7 -->
         <section class="form-section" id="section-7">
-          <h2 class="section-title">Job Match & Resume Settings</h2>
+
+          <h2 class="section-title">
+            Job Match & Resume Settings
+          </h2>
+
           <p class="section-subtitle">
             Paste a job description to see which important terms appear in your resume.
           </p>
 
           <div class="field">
+
             <label>Job Description</label>
-            <textarea id="jobDescription" maxlength="10000"
+
+            <textarea id="jobDescription"
+              maxlength="10000"
               placeholder="Paste the job description here..."></textarea>
-            <div class="hint">This keyword comparison runs locally in your browser.</div>
+
+            <div class="hint">
+              This keyword comparison runs locally in your browser.
+            </div>
+
           </div>
 
           <div class="match-box">
+
             <div class="score-top">
               <strong>Job Keyword Match</strong>
               <strong id="matchPercent">0%</strong>
@@ -1112,62 +1522,124 @@ footer{
 
             <div id="matchedKeywords" class="keyword-list"></div>
             <div id="missingKeywords" class="keyword-list"></div>
+
           </div>
 
           <div style="margin-top:20px">
-            <label style="display:block;margin-bottom:10px">Resume Template</label>
+
+            <label style="display:block;margin-bottom:10px">
+              Resume Template
+            </label>
 
             <div class="templates">
-              <button class="template selected" data-template="modern" onclick="selectTemplate('modern')">
+
+              <button class="template selected"
+                data-template="modern"
+                onclick="selectTemplate('modern')">
+
                 <div class="template-preview">
                   <div class="tp-line dark"></div>
                   <div class="tp-line short"></div>
                   <div class="tp-line mid"></div>
                 </div>
-                <div class="template-name">Modern</div>
+
+                <div class="template-name">
+                  Modern
+                </div>
+
               </button>
 
-              <button class="template" data-template="classic" onclick="selectTemplate('classic')">
+              <button class="template"
+                data-template="classic"
+                onclick="selectTemplate('classic')">
+
                 <div class="template-preview">
-                  <div class="tp-line dark" style="width:60%;margin:auto"></div>
-                  <div class="tp-line short" style="margin:auto"></div>
+                  <div class="tp-line dark"
+                    style="width:60%;margin:auto"></div>
+                  <div class="tp-line short"
+                    style="margin:auto"></div>
                   <div class="tp-line mid"></div>
                 </div>
-                <div class="template-name">Classic</div>
+
+                <div class="template-name">
+                  Classic
+                </div>
+
               </button>
 
-              <button class="template" data-template="minimal" onclick="selectTemplate('minimal')">
+              <button class="template"
+                data-template="minimal"
+                onclick="selectTemplate('minimal')">
+
                 <div class="template-preview">
                   <div class="tp-line dark"></div>
                   <div class="tp-line short"></div>
                   <div class="tp-line short"></div>
                 </div>
-                <div class="template-name">Minimal</div>
+
+                <div class="template-name">
+                  Minimal
+                </div>
+
               </button>
+
             </div>
+
           </div>
 
           <div class="score-card">
+
             <div class="score-top">
+
               <div>
+
                 <strong>ATS Readiness</strong>
-                <div class="hint">A checklist, not a hiring prediction.</div>
+
+                <div class="hint">
+                  A checklist, not a hiring prediction.
+                </div>
+
               </div>
-              <div class="score-number" id="scoreNumber">0%</div>
+
+              <div class="score-number"
+                id="scoreNumber">
+                0%
+              </div>
+
             </div>
 
             <div class="progress">
-              <div class="progress-bar" id="scoreBar"></div>
+              <div class="progress-bar"
+                id="scoreBar">
+              </div>
             </div>
 
-            <div id="scoreMessage" class="hint"></div>
-            <div id="checkList" class="check-list"></div>
+            <div id="scoreMessage"
+              class="hint">
+            </div>
+
+            <div id="checkList"
+              class="check-list">
+            </div>
+
           </div>
+
         </section>
 
         <div class="form-nav">
-          <button class="btn" id="prevBtn" onclick="prevStep()">← Previous</button>
-          <button class="btn btn-primary" id="nextBtn" onclick="nextStep()">Next →</button>
+
+          <button class="btn"
+            id="prevBtn"
+            onclick="prevStep()">
+            ← Previous
+          </button>
+
+          <button class="btn btn-primary"
+            id="nextBtn"
+            onclick="nextStep()">
+            Next →
+          </button>
+
         </div>
 
       </div>
@@ -1175,22 +1647,39 @@ footer{
 
     <!-- RIGHT PREVIEW -->
     <aside class="preview-wrap">
+
       <div class="panel">
 
         <div class="panel-head">
-          <h2 class="panel-title">Live Preview</h2>
+
+          <h2 class="panel-title">
+            Live Preview
+          </h2>
 
           <div class="preview-toolbar">
-            <button class="btn btn-success" onclick="downloadPDF()">🖨 PDF</button>
-            <button class="btn" onclick="shareResume()">↗ Share</button>
+
+            <button class="btn btn-success"
+              onclick="downloadPDF()">
+              🖨 PDF
+            </button>
+
+            <button class="btn"
+              onclick="shareResume()">
+              ↗ Share
+            </button>
+
           </div>
+
         </div>
 
         <div class="panel-body">
+
           <div id="resumePreview"></div>
+
         </div>
 
       </div>
+
     </aside>
 
   </div>
@@ -1198,28 +1687,214 @@ footer{
 </main>
 
 <footer>
-  <div>ResumeBuilder AI 2.0 • Free browser-based resume builder</div>
+
+  <div>
+    ResumeBuilder AI 2.0 • Professional Resume Builder
+  </div>
+
   <div class="privacy-note">
     🔒 Your resume data is processed in this page and saved locally in your browser.
-    This version does not upload your resume to an external API.
+    Saved resumes remain available until you delete them or clear browser storage.
   </div>
+
 </footer>
+
+<!-- SAVE / FINALIZE MODAL -->
+<div class="modal-backdrop" id="saveModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3>
+        Finalize & Save Resume
+      </h3>
+
+      <button class="small-btn"
+        onclick="closeSaveModal()">
+        ✕
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <div class="field">
+
+        <label>
+          Resume Name
+        </label>
+
+        <input
+          id="saveResumeName"
+          maxlength="100"
+          placeholder="e.g. Frontend Developer Resume">
+
+        <div class="hint">
+          This name will appear in My Resumes.
+        </div>
+
+      </div>
+
+      <div style="margin-top:18px">
+
+        <label style="display:block;margin-bottom:10px">
+          Choose Resume Type
+        </label>
+
+        <div class="pricing-grid">
+
+          <div class="price-card selected"
+            id="basicPriceCard"
+            onclick="selectPlan('basic')">
+
+            <div class="price-card-top">
+
+              <div>
+                <div class="price-name">
+                  Basic Resume
+                </div>
+
+                <div class="hint">
+                  Clean & professional
+                </div>
+              </div>
+
+              <div class="price-value">
+                ₹15
+              </div>
+
+            </div>
+
+            <ul>
+              <li>Professional basic template</li>
+              <li>Final Save</li>
+              <li>PDF & Share included</li>
+            </ul>
+
+          </div>
+
+          <div class="price-card"
+            id="professionalPriceCard"
+            onclick="selectPlan('professional')">
+
+            <div class="price-card-top">
+
+              <div>
+                <div class="price-name">
+                  Professional
+                </div>
+
+                <div class="hint">
+                  Advanced presentation
+                </div>
+              </div>
+
+              <div class="price-value">
+                ₹25
+              </div>
+
+            </div>
+
+            <ul>
+              <li>Premium template styling</li>
+              <li>Advanced formatting</li>
+              <li>PDF & Share included</li>
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="payment-note">
+        🔐 <strong>Before finalizing:</strong>
+        Please review your resume carefully.
+        After finalization, this version will be locked and cannot be edited.
+        You can still view, download PDF, share or delete it.
+        A new customized version will be created through <strong>New Resume</strong>.
+      </div>
+
+      <div class="payment-note">
+        ℹ️ Payment gateway is not connected in this version yet.
+        The ₹15/₹25 pricing is prepared for the future Razorpay integration.
+      </div>
+
+      <div class="modal-actions">
+
+        <button class="btn"
+          onclick="closeSaveModal()">
+          Cancel
+        </button>
+
+        <button class="btn btn-primary"
+          onclick="finalizeResume()">
+          ✓ Finalize & Save
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 
 <div class="toast" id="toast"></div>
 
 <script>
 /* =========================================================
    ResumeBuilder AI 2.0
-   API-free / Single-file implementation
+   Single-file Resume Builder
+   Multiple Saved Resumes
+   Draft Auto-Save
+   Finalized Resume Lock
+   Basic ₹15 / Professional ₹25
+   Payment-ready architecture
 ========================================================= */
+
+/* ---------- CONFIG ---------- */
 
 const COMPANY = {
   name: "ResumeBuilder AI 2.0"
 };
 
+/*
+  Future Razorpay configuration.
+
+  IMPORTANT:
+  These values do NOT process payments yet.
+  They are kept separate so a future Razorpay integration
+  can use the same pricing structure.
+*/
+const PRICING = {
+  basic: {
+    name: "Basic Resume",
+    price: 15
+  },
+  professional: {
+    name: "Professional Resume",
+    price: 25
+  }
+};
+
+const STORAGE_KEYS = {
+  resumes: "resumeBuilderAI2_resumes",
+  draft: "resumeBuilderAI2_draft"
+};
+
+/* ---------- STATE ---------- */
+
 let currentStep = 0;
 let currentLang = "en";
 let selectedTemplate = "modern";
+
+let currentResumeId = null;
+let currentResumeLocked = false;
+let selectedPlan = "basic";
+let hasUnsavedChanges = false;
+let isLoadingSnapshot = false;
 
 let data = {
   skills: [],
@@ -1238,6 +1913,7 @@ const LANG = {
     heroText:"Create a clean, ATS-friendly resume, check your resume readiness, and match it with a job description — directly in your browser.",
     formTitle:"Resume Builder",
     reset:"Reset",
+    newResume:"New Resume",
     next:"Next →",
     previous:"← Previous",
     finish:"Finish",
@@ -1252,12 +1928,14 @@ const LANG = {
       "Job Match"
     ]
   },
+
   hi:{
     heroA:"बनाइए",
     heroB:"Professional Resume",
     heroText:"Clean ATS-friendly resume बनाइए, readiness check कीजिए और Job Description से keywords match कीजिए — सीधे browser में।",
     formTitle:"Resume Builder",
     reset:"रीसेट",
+    newResume:"नया Resume",
     next:"आगे →",
     previous:"← पीछे",
     finish:"पूरा करें",
@@ -1275,82 +1953,300 @@ const LANG = {
 };
 
 function toggleLanguage(){
-  currentLang = currentLang === "en" ? "hi" : "en";
+
+  currentLang =
+    currentLang === "en"
+      ? "hi"
+      : "en";
+
   applyLanguage();
+  saveDraft();
+
 }
 
 function applyLanguage(){
+
   const l = LANG[currentLang];
 
-  document.getElementById("heroA").textContent = l.heroA;
-  document.getElementById("heroB").textContent = l.heroB;
-  document.getElementById("heroText").textContent = l.heroText;
-  document.getElementById("formTitle").textContent = l.formTitle;
-  document.getElementById("resetBtn").textContent = l.reset;
+  document.getElementById("heroA").textContent =
+    l.heroA;
+
+  document.getElementById("heroB").textContent =
+    l.heroB;
+
+  document.getElementById("heroText").textContent =
+    l.heroText;
+
+  document.getElementById("formTitle").textContent =
+    l.formTitle;
+
+  document.getElementById("resetBtn").textContent =
+    l.reset;
+
+  document.getElementById("newResumeBtn").textContent =
+    l.newResume;
+
+  document.getElementById("savedNewBtn").textContent =
+    l.newResume;
+
   document.getElementById("langBtn").textContent =
-    currentLang === "en" ? "हिंदी" : "English";
+    currentLang === "en"
+      ? "हिंदी"
+      : "English";
 
-  document.getElementById("prevBtn").textContent = l.previous;
+  document.getElementById("prevBtn").textContent =
+    l.previous;
+
   document.getElementById("nextBtn").textContent =
-    currentStep === 7 ? l.finish : l.next;
+    currentStep === 7
+      ? l.finish
+      : l.next;
 
-  const steps = document.getElementById("steps");
+  const steps =
+    document.getElementById("steps");
 
-  steps.innerHTML = l.steps.map((step,i)=>`
-    <button class="step ${i===currentStep ? "active":""}"
-      onclick="goStep(${i})">
-      ${i+1}. ${step}
-    </button>
-  `).join("");
+  steps.innerHTML =
+    l.steps.map((step,i)=>`
+      <button
+        class="step ${i===currentStep ? "active":""}"
+        onclick="goStep(${i})">
+        ${i+1}. ${esc(step)}
+      </button>
+    `).join("");
+
 }
 
 /* ---------- HELPERS ---------- */
 
 function esc(value){
+
   return String(value ?? "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#39;");
+
 }
 
 function val(id){
-  const el = document.getElementById(id);
-  return el ? el.value.trim() : "";
+
+  const el =
+    document.getElementById(id);
+
+  return el
+    ? el.value.trim()
+    : "";
+
 }
 
 function uid(){
-  return Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+
+  return Date.now().toString(36) +
+    Math.random().toString(36).slice(2,9);
+
 }
 
 function showToast(message){
-  const t = document.getElementById("toast");
+
+  const t =
+    document.getElementById("toast");
+
   t.textContent = message;
+
   t.classList.add("show");
 
   clearTimeout(window.__toastTimer);
-  window.__toastTimer = setTimeout(()=>{
-    t.classList.remove("show");
-  },2500);
+
+  window.__toastTimer =
+    setTimeout(()=>{
+      t.classList.remove("show");
+    },2800);
+
+}
+
+function formatDate(dateValue){
+
+  if(!dateValue) return "";
+
+  try{
+
+    const date =
+      new Date(dateValue);
+
+    if(Number.isNaN(date.getTime())){
+      return "";
+    }
+
+    return date.toLocaleDateString(
+      undefined,
+      {
+        day:"numeric",
+        month:"short",
+        year:"numeric"
+      }
+    );
+
+  }catch(e){
+
+    return "";
+
+  }
+
+}
+
+/* ---------- LOCK STATE ---------- */
+
+function setEditorLocked(locked){
+
+  currentResumeLocked = !!locked;
+
+  const fields =
+    document.querySelectorAll(
+      "#section-0 input," +
+      "#section-0 textarea," +
+      "#section-0 select," +
+      "#section-1 input," +
+      "#section-1 textarea," +
+      "#section-1 select," +
+      "#section-2 input," +
+      "#section-2 textarea," +
+      "#section-2 select," +
+      "#section-3 input," +
+      "#section-3 textarea," +
+      "#section-3 select," +
+      "#section-4 input," +
+      "#section-4 textarea," +
+      "#section-4 select," +
+      "#section-5 input," +
+      "#section-5 textarea," +
+      "#section-5 select," +
+      "#section-6 input," +
+      "#section-6 textarea," +
+      "#section-6 select," +
+      "#section-7 input," +
+      "#section-7 textarea," +
+      "#section-7 select"
+    );
+
+  fields.forEach(el=>{
+    el.disabled =
+      currentResumeLocked;
+  });
+
+  const buttons =
+    document.querySelectorAll(
+      "#experienceList button," +
+      "#educationList button," +
+      "#projectList button," +
+      "#certificationList button," +
+      "#section-4 button," +
+      "#section-5 button," +
+      "#section-1 button," +
+      "#section-7 .template"
+    );
+
+  buttons.forEach(btn=>{
+    btn.disabled =
+      currentResumeLocked;
+  });
+
+  const addButtons =
+    document.querySelectorAll(
+      "#section-2 .add-btn," +
+      "#section-3 .add-btn," +
+      "#section-5 .add-btn," +
+      "#section-4 .add-btn"
+    );
+
+  addButtons.forEach(btn=>{
+    btn.disabled =
+      currentResumeLocked;
+  });
+
+  const notice =
+    document.getElementById("lockedNotice");
+
+  notice.classList.toggle(
+    "show",
+    currentResumeLocked
+  );
+
+  updateSaveStatus();
+
+}
+
+function updateSaveStatus(){
+
+  const status =
+    document.getElementById("saveStatus");
+
+  if(currentResumeLocked){
+
+    status.className =
+      "save-status locked";
+
+    status.textContent =
+      "🔒 Finalized";
+
+    return;
+  }
+
+  if(currentResumeId && !hasUnsavedChanges){
+
+    status.className =
+      "save-status saved";
+
+    status.textContent =
+      "✓ Draft Ready";
+
+    return;
+  }
+
+  status.className =
+    "save-status unsaved";
+
+  status.textContent =
+    "● Unsaved";
+
 }
 
 /* ---------- NAVIGATION ---------- */
 
 function goStep(step){
-  currentStep = Math.max(0,Math.min(7,step));
 
-  document.querySelectorAll(".form-section").forEach((section,i)=>{
-    section.classList.toggle("active",i===currentStep);
-  });
+  currentStep =
+    Math.max(
+      0,
+      Math.min(7,step)
+    );
 
-  document.getElementById("stepCounter").textContent =
+  document
+    .querySelectorAll(".form-section")
+    .forEach((section,i)=>{
+
+      section.classList.toggle(
+        "active",
+        i === currentStep
+      );
+
+    });
+
+  document.getElementById(
+    "stepCounter"
+  ).textContent =
     `${currentStep+1} / 8`;
 
-  document.getElementById("prevBtn").style.visibility =
-    currentStep === 0 ? "hidden" : "visible";
+  document.getElementById(
+    "prevBtn"
+  ).style.visibility =
+    currentStep === 0
+      ? "hidden"
+      : "visible";
 
-  document.getElementById("nextBtn").textContent =
+  document.getElementById(
+    "nextBtn"
+  ).textContent =
     currentStep === 7
       ? LANG[currentLang].finish
       : LANG[currentLang].next;
@@ -1363,406 +2259,801 @@ function goStep(step){
   });
 
   updateAll();
+
 }
 
 function nextStep(){
-  if(currentStep === 0 && !validatePersonal()){
+
+  if(currentResumeLocked){
+
+    if(currentStep < 7){
+
+      goStep(currentStep + 1);
+
+    }else{
+
+      showToast(
+        "This resume is finalized and locked."
+      );
+
+    }
+
     return;
   }
 
-  if(currentStep < 7){
-    goStep(currentStep + 1);
-  }else{
-    updateAll();
-    showToast("Resume updated successfully.");
+  if(
+    currentStep === 0 &&
+    !validatePersonal()
+  ){
+
+    return;
+
   }
+
+  if(currentStep < 7){
+
+    goStep(currentStep + 1);
+
+  }else{
+
+    updateAll();
+
+    openSaveModal();
+
+  }
+
 }
 
 function prevStep(){
+
   if(currentStep > 0){
+
     goStep(currentStep - 1);
+
   }
+
 }
 
 function validatePersonal(){
-  const name = val("name");
-  const email = val("email");
+
+  const name =
+    val("name");
+
+  const email =
+    val("email");
 
   if(!name){
-    showToast("Please enter your full name.");
-    document.getElementById("name").focus();
+
+    showToast(
+      "Please enter your full name."
+    );
+
+    document.getElementById(
+      "name"
+    ).focus();
+
     return false;
+
   }
 
   if(!email){
-    showToast("Please enter your email.");
-    document.getElementById("email").focus();
+
+    showToast(
+      "Please enter your email."
+    );
+
+    document.getElementById(
+      "email"
+    ).focus();
+
     return false;
+
   }
 
-  const emailOK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const emailOK =
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+      email
+    );
 
   if(!emailOK){
-    showToast("Please enter a valid email address.");
-    document.getElementById("email").focus();
+
+    showToast(
+      "Please enter a valid email address."
+    );
+
+    document.getElementById(
+      "email"
+    ).focus();
+
     return false;
+
   }
 
   return true;
+
 }
 
 /* ---------- EXPERIENCE ---------- */
 
 function addExperience(item={}){
-  const id = uid();
+
+  if(currentResumeLocked){
+
+    showToast(
+      "This resume is locked. Create a new resume for changes."
+    );
+
+    return;
+
+  }
+
+  const id =
+    uid();
 
   data.experiences.push({
+
     id,
+
     title:item.title || "",
     company:item.company || "",
     location:item.location || "",
     start:item.start || "",
     end:item.end || "",
     description:item.description || ""
+
   });
 
   renderExperience();
-  saveData();
+  markChanged();
   updateAll();
+
 }
 
 function removeExperience(id){
-  data.experiences = data.experiences.filter(x=>x.id!==id);
+
+  if(currentResumeLocked) return;
+
+  data.experiences =
+    data.experiences.filter(
+      x=>x.id!==id
+    );
+
   renderExperience();
-  saveData();
+  markChanged();
   updateAll();
+
 }
 
 function renderExperience(){
-  const box = document.getElementById("experienceList");
+
+  const box =
+    document.getElementById(
+      "experienceList"
+    );
 
   if(!data.experiences.length){
+
     box.innerHTML = `
       <div class="empty">
-        No experience added yet. You can add internships or jobs.
+        No experience added yet.
+        You can add internships or jobs.
       </div>
     `;
+
     return;
+
   }
 
-  box.innerHTML = data.experiences.map((x,index)=>`
-    <div class="entry-card">
-      <div class="entry-head">
-        <strong>Experience ${index+1}</strong>
-        <button class="small-btn" onclick="removeExperience('${x.id}')">Remove</button>
+  box.innerHTML =
+    data.experiences.map(
+      (x,index)=>`
+
+      <div class="entry-card">
+
+        <div class="entry-head">
+
+          <strong>
+            Experience ${index+1}
+          </strong>
+
+          <button
+            class="small-btn"
+            onclick="removeExperience('${x.id}')">
+            Remove
+          </button>
+
+        </div>
+
+        <div class="grid">
+
+          <div class="field">
+
+            <label>Job Title</label>
+
+            <input
+              value="${esc(x.title)}"
+              oninput="updateExperience('${x.id}','title',this.value)"
+              placeholder="Frontend Developer">
+
+          </div>
+
+          <div class="field">
+
+            <label>Company</label>
+
+            <input
+              value="${esc(x.company)}"
+              oninput="updateExperience('${x.id}','company',this.value)"
+              placeholder="Company Name">
+
+          </div>
+
+          <div class="field">
+
+            <label>Location</label>
+
+            <input
+              value="${esc(x.location)}"
+              oninput="updateExperience('${x.id}','location',this.value)"
+              placeholder="City / Remote">
+
+          </div>
+
+          <div class="field">
+
+            <label>Start — End</label>
+
+            <input
+              value="${esc(x.start)}"
+              oninput="updateExperience('${x.id}','start',this.value)"
+              placeholder="Jan 2024 — Present">
+
+          </div>
+
+          <div class="field full">
+
+            <label>
+              Description / Achievements
+            </label>
+
+            <textarea
+              oninput="updateExperience('${x.id}','description',this.value)"
+              placeholder="Built responsive interfaces using HTML, CSS and JavaScript.">${esc(x.description)}</textarea>
+
+          </div>
+
+        </div>
+
+        ${weakBulletTip(x.description)}
+
       </div>
 
-      <div class="grid">
-        <div class="field">
-          <label>Job Title</label>
-          <input value="${esc(x.title)}"
-            oninput="updateExperience('${x.id}','title',this.value)"
-            placeholder="Frontend Developer">
-        </div>
+    `).join("");
 
-        <div class="field">
-          <label>Company</label>
-          <input value="${esc(x.company)}"
-            oninput="updateExperience('${x.id}','company',this.value)"
-            placeholder="Company Name">
-        </div>
+  setEditorLocked(currentResumeLocked);
 
-        <div class="field">
-          <label>Location</label>
-          <input value="${esc(x.location)}"
-            oninput="updateExperience('${x.id}','location',this.value)"
-            placeholder="City / Remote">
-        </div>
-
-        <div class="field">
-          <label>Start — End</label>
-          <input value="${esc(x.start)}"
-            oninput="updateExperience('${x.id}','start',this.value)"
-            placeholder="Jan 2024 — Present">
-        </div>
-
-        <div class="field full">
-          <label>Description / Achievements</label>
-          <textarea
-            oninput="updateExperience('${x.id}','description',this.value)"
-            placeholder="Built responsive interfaces using HTML, CSS and JavaScript.">${esc(x.description)}</textarea>
-        </div>
-      </div>
-
-      ${weakBulletTip(x.description)}
-    </div>
-  `).join("");
 }
 
 function updateExperience(id,key,value){
-  const item = data.experiences.find(x=>x.id===id);
+
+  if(currentResumeLocked) return;
+
+  const item =
+    data.experiences.find(
+      x=>x.id===id
+    );
+
   if(!item) return;
 
-  item[key] = value;
-  saveData();
+  item[key] =
+    value;
+
+  markChanged();
+
   updatePreview();
   updateATS();
+
 }
 
 /* ---------- EDUCATION ---------- */
 
 function addEducation(item={}){
-  const id = uid();
+
+  if(currentResumeLocked){
+
+    showToast(
+      "This resume is locked. Create a new resume for changes."
+    );
+
+    return;
+
+  }
+
+  const id =
+    uid();
 
   data.education.push({
+
     id,
+
     degree:item.degree || "",
     institution:item.institution || "",
     location:item.location || "",
     year:item.year || "",
     detail:item.detail || ""
+
   });
 
   renderEducation();
-  saveData();
+  markChanged();
   updateAll();
+
 }
 
 function removeEducation(id){
-  data.education = data.education.filter(x=>x.id!==id);
+
+  if(currentResumeLocked) return;
+
+  data.education =
+    data.education.filter(
+      x=>x.id!==id
+    );
+
   renderEducation();
-  saveData();
+  markChanged();
   updateAll();
+
 }
 
 function renderEducation(){
-  const box = document.getElementById("educationList");
+
+  const box =
+    document.getElementById(
+      "educationList"
+    );
 
   if(!data.education.length){
-    box.innerHTML = `<div class="empty">No education added yet.</div>`;
+
+    box.innerHTML =
+      `<div class="empty">
+        No education added yet.
+      </div>`;
+
     return;
+
   }
 
-  box.innerHTML = data.education.map((x,index)=>`
-    <div class="entry-card">
-      <div class="entry-head">
-        <strong>Education ${index+1}</strong>
-        <button class="small-btn" onclick="removeEducation('${x.id}')">Remove</button>
+  box.innerHTML =
+    data.education.map(
+      (x,index)=>`
+
+      <div class="entry-card">
+
+        <div class="entry-head">
+
+          <strong>
+            Education ${index+1}
+          </strong>
+
+          <button
+            class="small-btn"
+            onclick="removeEducation('${x.id}')">
+            Remove
+          </button>
+
+        </div>
+
+        <div class="grid">
+
+          <div class="field">
+
+            <label>
+              Degree / Qualification
+            </label>
+
+            <input
+              value="${esc(x.degree)}"
+              oninput="updateEducation('${x.id}','degree',this.value)"
+              placeholder="B.Tech Computer Science">
+
+          </div>
+
+          <div class="field">
+
+            <label>Institution</label>
+
+            <input
+              value="${esc(x.institution)}"
+              oninput="updateEducation('${x.id}','institution',this.value)"
+              placeholder="University / College">
+
+          </div>
+
+          <div class="field">
+
+            <label>Location</label>
+
+            <input
+              value="${esc(x.location)}"
+              oninput="updateEducation('${x.id}','location',this.value)"
+              placeholder="City">
+
+          </div>
+
+          <div class="field">
+
+            <label>Year</label>
+
+            <input
+              value="${esc(x.year)}"
+              oninput="updateEducation('${x.id}','year',this.value)"
+              placeholder="2026">
+
+          </div>
+
+          <div class="field full">
+
+            <label>Details</label>
+
+            <input
+              value="${esc(x.detail)}"
+              oninput="updateEducation('${x.id}','detail',this.value)"
+              placeholder="CGPA, specialization, relevant coursework...">
+
+          </div>
+
+        </div>
+
       </div>
 
-      <div class="grid">
-        <div class="field">
-          <label>Degree / Qualification</label>
-          <input value="${esc(x.degree)}"
-            oninput="updateEducation('${x.id}','degree',this.value)"
-            placeholder="B.Tech Computer Science">
-        </div>
+    `).join("");
 
-        <div class="field">
-          <label>Institution</label>
-          <input value="${esc(x.institution)}"
-            oninput="updateEducation('${x.id}','institution',this.value)"
-            placeholder="University / College">
-        </div>
+  setEditorLocked(currentResumeLocked);
 
-        <div class="field">
-          <label>Location</label>
-          <input value="${esc(x.location)}"
-            oninput="updateEducation('${x.id}','location',this.value)"
-            placeholder="City">
-        </div>
-
-        <div class="field">
-          <label>Year</label>
-          <input value="${esc(x.year)}"
-            oninput="updateEducation('${x.id}','year',this.value)"
-            placeholder="2026">
-        </div>
-
-        <div class="field full">
-          <label>Details</label>
-          <input value="${esc(x.detail)}"
-            oninput="updateEducation('${x.id}','detail',this.value)"
-            placeholder="CGPA, specialization, relevant coursework...">
-        </div>
-      </div>
-    </div>
-  `).join("");
 }
 
 function updateEducation(id,key,value){
-  const item = data.education.find(x=>x.id===id);
+
+  if(currentResumeLocked) return;
+
+  const item =
+    data.education.find(
+      x=>x.id===id
+    );
+
   if(!item) return;
 
-  item[key] = value;
-  saveData();
+  item[key] =
+    value;
+
+  markChanged();
+
   updatePreview();
   updateATS();
+
 }
 
 /* ---------- PROJECTS ---------- */
 
 function addProject(item={}){
-  const id = uid();
+
+  if(currentResumeLocked){
+
+    showToast(
+      "This resume is locked. Create a new resume for changes."
+    );
+
+    return;
+
+  }
+
+  const id =
+    uid();
 
   data.projects.push({
+
     id,
+
     name:item.name || "",
     tech:item.tech || "",
     link:item.link || "",
     description:item.description || ""
+
   });
 
   renderProjects();
-  saveData();
+  markChanged();
   updateAll();
+
 }
 
 function removeProject(id){
-  data.projects = data.projects.filter(x=>x.id!==id);
+
+  if(currentResumeLocked) return;
+
+  data.projects =
+    data.projects.filter(
+      x=>x.id!==id
+    );
+
   renderProjects();
-  saveData();
+  markChanged();
   updateAll();
+
 }
 
 function renderProjects(){
-  const box = document.getElementById("projectList");
+
+  const box =
+    document.getElementById(
+      "projectList"
+    );
 
   if(!data.projects.length){
-    box.innerHTML = `<div class="empty">No projects added yet.</div>`;
+
+    box.innerHTML =
+      `<div class="empty">
+        No projects added yet.
+      </div>`;
+
     return;
+
   }
 
-  box.innerHTML = data.projects.map((x,index)=>`
-    <div class="entry-card">
-      <div class="entry-head">
-        <strong>Project ${index+1}</strong>
-        <button class="small-btn" onclick="removeProject('${x.id}')">Remove</button>
+  box.innerHTML =
+    data.projects.map(
+      (x,index)=>`
+
+      <div class="entry-card">
+
+        <div class="entry-head">
+
+          <strong>
+            Project ${index+1}
+          </strong>
+
+          <button
+            class="small-btn"
+            onclick="removeProject('${x.id}')">
+            Remove
+          </button>
+
+        </div>
+
+        <div class="grid">
+
+          <div class="field">
+
+            <label>
+              Project Name
+            </label>
+
+            <input
+              value="${esc(x.name)}"
+              oninput="updateProject('${x.id}','name',this.value)"
+              placeholder="E-commerce Website">
+
+          </div>
+
+          <div class="field">
+
+            <label>Technologies</label>
+
+            <input
+              value="${esc(x.tech)}"
+              oninput="updateProject('${x.id}','tech',this.value)"
+              placeholder="HTML, CSS, JavaScript">
+
+          </div>
+
+          <div class="field full">
+
+            <label>Project Link</label>
+
+            <input
+              value="${esc(x.link)}"
+              oninput="updateProject('${x.id}','link',this.value)"
+              placeholder="GitHub / Live Demo">
+
+          </div>
+
+          <div class="field full">
+
+            <label>Description</label>
+
+            <textarea
+              oninput="updateProject('${x.id}','description',this.value)"
+              placeholder="Describe what you built and what you contributed.">${esc(x.description)}</textarea>
+
+          </div>
+
+        </div>
+
       </div>
 
-      <div class="grid">
-        <div class="field">
-          <label>Project Name</label>
-          <input value="${esc(x.name)}"
-            oninput="updateProject('${x.id}','name',this.value)"
-            placeholder="E-commerce Website">
-        </div>
+    `).join("");
 
-        <div class="field">
-          <label>Technologies</label>
-          <input value="${esc(x.tech)}"
-            oninput="updateProject('${x.id}','tech',this.value)"
-            placeholder="HTML, CSS, JavaScript">
-        </div>
+  setEditorLocked(currentResumeLocked);
 
-        <div class="field full">
-          <label>Project Link</label>
-          <input value="${esc(x.link)}"
-            oninput="updateProject('${x.id}','link',this.value)"
-            placeholder="GitHub / Live Demo">
-        </div>
-
-        <div class="field full">
-          <label>Description</label>
-          <textarea
-            oninput="updateProject('${x.id}','description',this.value)"
-            placeholder="Describe what you built and what you contributed.">${esc(x.description)}</textarea>
-        </div>
-      </div>
-    </div>
-  `).join("");
 }
 
 function updateProject(id,key,value){
-  const item = data.projects.find(x=>x.id===id);
+
+  if(currentResumeLocked) return;
+
+  const item =
+    data.projects.find(
+      x=>x.id===id
+    );
+
   if(!item) return;
 
-  item[key] = value;
-  saveData();
+  item[key] =
+    value;
+
+  markChanged();
+
   updatePreview();
   updateATS();
+
 }
 
 /* ---------- CERTIFICATIONS ---------- */
 
 function addCertification(item={}){
-  const id = uid();
+
+  if(currentResumeLocked){
+
+    showToast(
+      "This resume is locked. Create a new resume for changes."
+    );
+
+    return;
+
+  }
+
+  const id =
+    uid();
 
   data.certifications.push({
+
     id,
+
     name:item.name || "",
     issuer:item.issuer || "",
     year:item.year || ""
+
   });
 
   renderCertifications();
-  saveData();
+  markChanged();
   updateAll();
+
 }
 
 function removeCertification(id){
+
+  if(currentResumeLocked) return;
+
   data.certifications =
-    data.certifications.filter(x=>x.id!==id);
+    data.certifications.filter(
+      x=>x.id!==id
+    );
 
   renderCertifications();
-  saveData();
+  markChanged();
   updateAll();
+
 }
 
 function renderCertifications(){
-  const box = document.getElementById("certificationList");
+
+  const box =
+    document.getElementById(
+      "certificationList"
+    );
 
   if(!data.certifications.length){
-    box.innerHTML = `<div class="empty">No certifications added yet.</div>`;
+
+    box.innerHTML =
+      `<div class="empty">
+        No certifications added yet.
+      </div>`;
+
     return;
+
   }
 
-  box.innerHTML = data.certifications.map((x,index)=>`
-    <div class="entry-card">
-      <div class="entry-head">
-        <strong>Certification ${index+1}</strong>
-        <button class="small-btn" onclick="removeCertification('${x.id}')">Remove</button>
+  box.innerHTML =
+    data.certifications.map(
+      (x,index)=>`
+
+      <div class="entry-card">
+
+        <div class="entry-head">
+
+          <strong>
+            Certification ${index+1}
+          </strong>
+
+          <button
+            class="small-btn"
+            onclick="removeCertification('${x.id}')">
+            Remove
+          </button>
+
+        </div>
+
+        <div class="grid">
+
+          <div class="field">
+
+            <label>Certification</label>
+
+            <input
+              value="${esc(x.name)}"
+              oninput="updateCertification('${x.id}','name',this.value)"
+              placeholder="Google Data Analytics">
+
+          </div>
+
+          <div class="field">
+
+            <label>Issuer</label>
+
+            <input
+              value="${esc(x.issuer)}"
+              oninput="updateCertification('${x.id}','issuer',this.value)"
+              placeholder="Google">
+
+          </div>
+
+          <div class="field">
+
+            <label>Year</label>
+
+            <input
+              value="${esc(x.year)}"
+              oninput="updateCertification('${x.id}','year',this.value)"
+              placeholder="2026">
+
+          </div>
+
+        </div>
+
       </div>
 
-      <div class="grid">
-        <div class="field">
-          <label>Certification</label>
-          <input value="${esc(x.name)}"
-            oninput="updateCertification('${x.id}','name',this.value)"
-            placeholder="Google Data Analytics">
-        </div>
+    `).join("");
 
-        <div class="field">
-          <label>Issuer</label>
-          <input value="${esc(x.issuer)}"
-            oninput="updateCertification('${x.id}','issuer',this.value)"
-            placeholder="Google">
-        </div>
+  setEditorLocked(currentResumeLocked);
 
-        <div class="field">
-          <label>Year</label>
-          <input value="${esc(x.year)}"
-            oninput="updateCertification('${x.id}','year',this.value)"
-            placeholder="2026">
-        </div>
-      </div>
-    </div>
-  `).join("");
 }
 
 function updateCertification(id,key,value){
-  const item = data.certifications.find(x=>x.id===id);
+
+  if(currentResumeLocked) return;
+
+  const item =
+    data.certifications.find(
+      x=>x.id===id
+    );
+
   if(!item) return;
 
-  item[key] = value;
-  saveData();
+  item[key] =
+    value;
+
+  markChanged();
+
   updatePreview();
   updateATS();
+
 }
 
 /* ---------- SKILLS ---------- */
 
 const suggestedSkillSet = [
+
   "HTML",
   "CSS",
   "JavaScript",
@@ -1777,516 +3068,1043 @@ const suggestedSkillSet = [
   "Communication",
   "Problem Solving",
   "Teamwork"
+
 ];
 
 function addSkill(){
-  const input = document.getElementById("skillInput");
-  const skill = input.value.trim();
+
+  if(currentResumeLocked){
+
+    showToast(
+      "This resume is locked. Create a new resume for changes."
+    );
+
+    return;
+
+  }
+
+  const input =
+    document.getElementById(
+      "skillInput"
+    );
+
+  const skill =
+    input.value.trim();
 
   if(!skill) return;
 
-  if(data.skills.some(x=>x.toLowerCase()===skill.toLowerCase())){
-    showToast("Skill already added.");
+  if(
+    data.skills.some(
+      x=>x.toLowerCase() ===
+         skill.toLowerCase()
+    )
+  ){
+
+    showToast(
+      "Skill already added."
+    );
+
     return;
+
   }
 
   data.skills.push(skill);
+
   input.value = "";
 
   renderSkills();
-  saveData();
+  markChanged();
   updateAll();
+
 }
 
 function removeSkill(index){
+
+  if(currentResumeLocked) return;
+
   data.skills.splice(index,1);
+
   renderSkills();
-  saveData();
+  markChanged();
   updateAll();
+
 }
 
 function addSuggestedSkill(skill){
-  if(!data.skills.some(x=>x.toLowerCase()===skill.toLowerCase())){
+
+  if(currentResumeLocked) return;
+
+  if(
+    !data.skills.some(
+      x=>x.toLowerCase() ===
+         skill.toLowerCase()
+    )
+  ){
+
     data.skills.push(skill);
+
     renderSkills();
-    saveData();
+    markChanged();
     updateAll();
+
   }
+
 }
 
 function renderSkills(){
-  const box = document.getElementById("skillList");
+
+  const box =
+    document.getElementById(
+      "skillList"
+    );
 
   if(!data.skills.length){
-    box.innerHTML = `<div class="empty" style="width:100%">No skills added yet.</div>`;
+
+    box.innerHTML =
+      `<div class="empty"
+        style="width:100%">
+        No skills added yet.
+      </div>`;
+
   }else{
-    box.innerHTML = data.skills.map((skill,i)=>`
-      <span class="skill-chip">
-        ${esc(skill)}
-        <button onclick="removeSkill(${i})" aria-label="Remove ${esc(skill)}">×</button>
-      </span>
-    `).join("");
+
+    box.innerHTML =
+      data.skills.map(
+        (skill,i)=>`
+
+        <span class="skill-chip">
+
+          ${esc(skill)}
+
+          <button
+            onclick="removeSkill(${i})"
+            aria-label="Remove ${esc(skill)}">
+            ×
+          </button>
+
+        </span>
+
+      `).join("");
+
   }
 
-  document.getElementById("suggestedSkills").innerHTML =
+  document.getElementById(
+    "suggestedSkills"
+  ).innerHTML =
+
     suggestedSkillSet
-      .filter(skill=>!data.skills.some(x=>x.toLowerCase()===skill.toLowerCase()))
-      .map(skill=>`
-        <button class="small-btn" onclick="addSuggestedSkill('${skill.replace(/'/g,"\\'")}')">
+
+      .filter(
+        skill=>
+          !data.skills.some(
+            x=>x.toLowerCase() ===
+               skill.toLowerCase()
+          )
+      )
+
+      .map(
+        skill=>`
+
+        <button
+          class="small-btn"
+          onclick="addSuggestedSkill('${skill.replace(/'/g,"\\'")}')">
+
           + ${esc(skill)}
+
         </button>
+
       `).join("");
+
+  setEditorLocked(currentResumeLocked);
+
 }
 
 /* ---------- SUMMARY ---------- */
 
 function generateSummarySuggestion(){
-  const role = val("role") || "professional";
-  const strength = val("summaryStrength");
-  const years = val("summaryExperience");
+
+  if(currentResumeLocked){
+
+    showToast(
+      "This resume is locked. Create a new resume for changes."
+    );
+
+    return;
+
+  }
+
+  const role =
+    val("role") ||
+    "professional";
+
+  const strength =
+    val("summaryStrength");
+
+  const years =
+    val("summaryExperience");
 
   let text = "";
 
   if(years === "0"){
+
     text =
       `Motivated ${role} with a strong foundation in ${strength || "relevant technical and professional skills"}. ` +
       `Interested in applying practical knowledge, learning continuously, and contributing to a collaborative team.`;
+
   }else{
+
     text =
       `${role} with ${years}+ years of experience and a focus on ${strength || "relevant professional skills"}. ` +
       `Experienced in applying practical knowledge to projects and collaborating with teams to deliver reliable results.`;
+
   }
 
-  document.getElementById("summary").value = text;
+  document.getElementById(
+    "summary"
+  ).value = text;
+
+  markChanged();
+
   updateAll();
-  showToast("Summary suggestion added. Edit it to match your real experience.");
+
+  showToast(
+    "Summary suggestion added. Edit it to match your real experience."
+  );
+
 }
 
 /* ---------- WEAK BULLET CHECK ---------- */
 
 function weakBulletTip(text){
+
   if(!text) return "";
 
   const weakWords = [
+
     "worked",
     "helped",
     "responsible for",
     "did",
     "handled",
     "made"
+
   ];
 
-  const lower = text.toLowerCase();
+  const lower =
+    text.toLowerCase();
 
-  const found = weakWords.filter(x=>lower.includes(x));
+  const found =
+    weakWords.filter(
+      x=>lower.includes(x)
+    );
 
-  if(!found.length) return "";
+  if(!found.length)
+    return "";
 
   return `
+
     <div class="tip">
+
       ✨ <strong>Improvement suggestion:</strong>
+
       Consider replacing generic phrases like
       <strong>${esc(found.join(", "))}</strong>
       with a specific action you actually performed.
+
       Don't add numbers or results unless they are genuine.
+
     </div>
+
   `;
+
 }
 
 /* ---------- TEMPLATE ---------- */
 
 function selectTemplate(template){
-  selectedTemplate = template;
 
-  document.querySelectorAll(".template").forEach(btn=>{
-    btn.classList.toggle(
-      "selected",
-      btn.dataset.template === template
+  if(currentResumeLocked){
+
+    showToast(
+      "This resume is locked. Create a new resume to change its template."
     );
-  });
 
-  saveData();
+    return;
+
+  }
+
+  selectedTemplate =
+    template;
+
+  document
+    .querySelectorAll(".template")
+    .forEach(btn=>{
+
+      btn.classList.toggle(
+        "selected",
+        btn.dataset.template ===
+          template
+      );
+
+    });
+
+  markChanged();
+
   updatePreview();
+
 }
 
 /* ---------- RESUME TEXT ---------- */
 
 function getResumeText(){
+
   const parts = [];
 
   parts.push(
+
     val("name"),
     val("role"),
     val("headline"),
     val("summary")
+
   );
 
   parts.push(
+
     val("email"),
     val("phone"),
     val("location"),
     val("linkedin"),
     val("portfolio")
+
   );
 
-  data.skills.forEach(x=>parts.push(x));
+  data.skills.forEach(
+    x=>parts.push(x)
+  );
 
   data.experiences.forEach(x=>{
+
     parts.push(
+
       x.title,
       x.company,
       x.location,
       x.start,
       x.end,
       x.description
+
     );
+
   });
 
   data.education.forEach(x=>{
+
     parts.push(
+
       x.degree,
       x.institution,
       x.location,
       x.year,
       x.detail
+
     );
+
   });
 
   data.projects.forEach(x=>{
+
     parts.push(
+
       x.name,
       x.tech,
       x.link,
       x.description
+
     );
+
   });
 
   data.certifications.forEach(x=>{
-    parts.push(x.name,x.issuer,x.year);
+
+    parts.push(
+      x.name,
+      x.issuer,
+      x.year
+    );
+
   });
 
   parts.push(
+
     val("achievements"),
     val("languages"),
     val("additional")
+
   );
 
   return parts.join(" ");
+
 }
 
 /* ---------- PREVIEW ---------- */
 
 function formatLines(text){
+
   if(!text) return "";
 
   return text
+
     .split(/\n+/)
-    .map(x=>x.replace(/^[•\-*]\s*/,"").trim())
+
+    .map(
+      x=>
+        x
+          .replace(/^[•\-*]\s*/,"")
+          .trim()
+    )
+
     .filter(Boolean)
-    .map(x=>`<li>${esc(x)}</li>`)
+
+    .map(
+      x=>`<li>${esc(x)}</li>`
+    )
+
     .join("");
+
 }
 
 function renderExperiencePreview(){
-  if(!data.experiences.length) return "";
 
-  const items = data.experiences
-    .filter(x=>x.title || x.company || x.description)
-    .map(x=>`
-      <div class="resume-entry">
-        <div class="resume-entry-top">
-          <div>
-            <h3>${esc(x.title || "Role")}</h3>
-            <div class="resume-company">${esc(x.company)}</div>
+  if(!data.experiences.length)
+    return "";
+
+  const items =
+
+    data.experiences
+
+      .filter(
+        x=>
+          x.title ||
+          x.company ||
+          x.description
+      )
+
+      .map(x=>`
+
+        <div class="resume-entry">
+
+          <div class="resume-entry-top">
+
+            <div>
+
+              <h3>
+                ${esc(x.title || "Role")}
+              </h3>
+
+              <div class="resume-company">
+                ${esc(x.company)}
+              </div>
+
+            </div>
+
+            <div class="resume-date">
+              ${esc(
+                x.start +
+                (x.end ? " — " + x.end : "")
+              )}
+            </div>
+
           </div>
-          <div class="resume-date">${esc(x.start)}</div>
+
+          ${
+            x.location
+              ? `<div class="resume-company">
+                   ${esc(x.location)}
+                 </div>`
+              : ""
+          }
+
+          ${
+            x.description
+              ? `<ul class="resume-bullets">
+                   ${formatLines(x.description)}
+                 </ul>`
+              : ""
+          }
+
         </div>
 
-        ${x.location ? `<div class="resume-company">${esc(x.location)}</div>`:""}
+      `)
 
-        ${
-          x.description
-            ? `<ul class="resume-bullets">${formatLines(x.description)}</ul>`
-            : ""
-        }
-      </div>
-    `)
-    .join("");
+      .join("");
 
-  return items ? `<h2>Experience</h2>${items}` : "";
+  return items
+    ? `<h2>Experience</h2>${items}`
+    : "";
+
 }
 
 function renderEducationPreview(){
-  if(!data.education.length) return "";
 
-  const items = data.education
-    .filter(x=>x.degree || x.institution)
-    .map(x=>`
-      <div class="resume-entry">
-        <div class="resume-entry-top">
-          <div>
-            <h3>${esc(x.degree)}</h3>
-            <div class="resume-company">${esc(x.institution)}</div>
+  if(!data.education.length)
+    return "";
+
+  const items =
+
+    data.education
+
+      .filter(
+        x=>
+          x.degree ||
+          x.institution
+      )
+
+      .map(x=>`
+
+        <div class="resume-entry">
+
+          <div class="resume-entry-top">
+
+            <div>
+
+              <h3>
+                ${esc(x.degree)}
+              </h3>
+
+              <div class="resume-company">
+                ${esc(x.institution)}
+              </div>
+
+            </div>
+
+            <div class="resume-date">
+              ${esc(x.year)}
+            </div>
+
           </div>
-          <div class="resume-date">${esc(x.year)}</div>
+
+          ${
+            x.location
+              ? `<div class="resume-company">
+                   ${esc(x.location)}
+                 </div>`
+              : ""
+          }
+
+          ${
+            x.detail
+              ? `<p>
+                   ${esc(x.detail)}
+                 </p>`
+              : ""
+          }
+
         </div>
 
-        ${
-          x.detail
-            ? `<p>${esc(x.detail)}</p>`
-            : ""
-        }
-      </div>
-    `)
-    .join("");
+      `)
 
-  return items ? `<h2>Education</h2>${items}` : "";
+      .join("");
+
+  return items
+    ? `<h2>Education</h2>${items}`
+    : "";
+
 }
 
 function renderProjectsPreview(){
-  if(!data.projects.length) return "";
 
-  const items = data.projects
-    .filter(x=>x.name || x.description)
-    .map(x=>`
-      <div class="resume-entry">
-        <div class="resume-entry-top">
-          <div>
-            <h3>${esc(x.name)}</h3>
+  if(!data.projects.length)
+    return "";
+
+  const items =
+
+    data.projects
+
+      .filter(
+        x=>
+          x.name ||
+          x.description
+      )
+
+      .map(x=>`
+
+        <div class="resume-entry">
+
+          <div class="resume-entry-top">
+
+            <div>
+
+              <h3>
+                ${esc(x.name)}
+              </h3>
+
+              ${
+                x.tech
+                  ? `<div class="resume-company">
+                       ${esc(x.tech)}
+                     </div>`
+                  : ""
+              }
+
+            </div>
+
             ${
-              x.tech
-                ? `<div class="resume-company">${esc(x.tech)}</div>`
+              x.link
+                ? `<div class="resume-date">
+                     ${esc(x.link)}
+                   </div>`
                 : ""
             }
+
           </div>
+
           ${
-            x.link
-              ? `<div class="resume-date">${esc(x.link)}</div>`
+            x.description
+              ? `<p>
+                   ${esc(x.description)}
+                 </p>`
               : ""
           }
+
         </div>
 
-        ${
-          x.description
-            ? `<p>${esc(x.description)}</p>`
-            : ""
-        }
-      </div>
-    `)
-    .join("");
+      `)
 
-  return items ? `<h2>Projects</h2>${items}` : "";
+      .join("");
+
+  return items
+    ? `<h2>Projects</h2>${items}`
+    : "";
+
 }
 
 function renderCertificationPreview(){
-  if(!data.certifications.length) return "";
 
-  const items = data.certifications
-    .filter(x=>x.name)
-    .map(x=>`
-      <div class="resume-entry">
-        <div class="resume-entry-top">
-          <div>
-            <h3>${esc(x.name)}</h3>
-            <div class="resume-company">${esc(x.issuer)}</div>
+  if(!data.certifications.length)
+    return "";
+
+  const items =
+
+    data.certifications
+
+      .filter(
+        x=>x.name
+      )
+
+      .map(x=>`
+
+        <div class="resume-entry">
+
+          <div class="resume-entry-top">
+
+            <div>
+
+              <h3>
+                ${esc(x.name)}
+              </h3>
+
+              <div class="resume-company">
+                ${esc(x.issuer)}
+              </div>
+
+            </div>
+
+            <div class="resume-date">
+              ${esc(x.year)}
+            </div>
+
           </div>
-          <div class="resume-date">${esc(x.year)}</div>
-        </div>
-      </div>
-    `)
-    .join("");
 
-  return items ? `<h2>Certifications</h2>${items}` : "";
+        </div>
+
+      `)
+
+      .join("");
+
+  return items
+    ? `<h2>Certifications</h2>${items}`
+    : "";
+
 }
 
 function updatePreview(){
-  const name = val("name") || "Your Name";
-  const role = val("role") || val("headline") || "Professional";
+
+  const name =
+    val("name") ||
+    "Your Name";
+
+  const role =
+    val("role") ||
+    val("headline") ||
+    "Professional";
 
   const contact = [
+
     val("email"),
     val("phone"),
     val("location"),
     val("linkedin"),
     val("portfolio")
-  ].filter(Boolean).map(esc).join(" • ");
+
+  ]
+
+    .filter(Boolean)
+
+    .map(esc)
+
+    .join(" • ");
 
   let html = `
-    <div class="resume-page ${selectedTemplate}" id="printableResume">
+
+    <div
+      class="resume-page ${selectedTemplate}"
+      id="printableResume">
 
       <div class="resume-header">
-        <h1>${esc(name)}</h1>
-        <div class="resume-role">${esc(role)}</div>
+
+        <h1>
+          ${esc(name)}
+        </h1>
+
+        <div class="resume-role">
+          ${esc(role)}
+        </div>
 
         ${
           val("headline")
-            ? `<div class="resume-company">${esc(val("headline"))}</div>`
+            ? `<div class="resume-company">
+                 ${esc(val("headline"))}
+               </div>`
             : ""
         }
 
         ${
           contact
-            ? `<div class="resume-contact">${contact}</div>`
+            ? `<div class="resume-contact">
+                 ${contact}
+               </div>`
             : ""
         }
+
       </div>
+
   `;
 
   if(val("summary")){
+
     html += `
-      <h2>Professional Summary</h2>
-      <div class="resume-summary">${esc(val("summary"))}</div>
+
+      <h2>
+        Professional Summary
+      </h2>
+
+      <div class="resume-summary">
+        ${esc(val("summary"))}
+      </div>
+
     `;
+
   }
 
-  html += renderExperiencePreview();
-  html += renderProjectsPreview();
+  html +=
+    renderExperiencePreview();
+
+  html +=
+    renderProjectsPreview();
 
   if(data.skills.length){
+
     html += `
-      <h2>Skills</h2>
+
+      <h2>
+        Skills
+      </h2>
+
       <div class="resume-skills">
-        ${data.skills.map(skill=>`
-          <span class="resume-skill">${esc(skill)}</span>
-        `).join("")}
+
+        ${
+          data.skills.map(
+            skill=>`
+              <span class="resume-skill">
+                ${esc(skill)}
+              </span>
+            `
+          ).join("")
+        }
+
       </div>
+
     `;
+
   }
 
-  html += renderEducationPreview();
-  html += renderCertificationPreview();
+  html +=
+    renderEducationPreview();
+
+  html +=
+    renderCertificationPreview();
 
   if(val("achievements")){
+
     html += `
-      <h2>Achievements</h2>
+
+      <h2>
+        Achievements
+      </h2>
+
       <ul class="resume-bullets">
-        ${formatLines(val("achievements"))}
+
+        ${formatLines(
+          val("achievements")
+        )}
+
       </ul>
+
     `;
+
   }
 
   if(val("languages")){
+
     html += `
-      <h2>Languages</h2>
-      <div>${esc(val("languages"))}</div>
+
+      <h2>
+        Languages
+      </h2>
+
+      <div>
+        ${esc(val("languages"))}
+      </div>
+
     `;
+
   }
 
   if(val("additional")){
+
     html += `
-      <h2>Additional Information</h2>
-      <div>${esc(val("additional"))}</div>
+
+      <h2>
+        Additional Information
+      </h2>
+
+      <div>
+        ${esc(val("additional"))}
+      </div>
+
     `;
+
   }
 
   html += `</div>`;
 
-  document.getElementById("resumePreview").innerHTML = html;
+  document.getElementById(
+    "resumePreview"
+  ).innerHTML = html;
+
 }
 
 /* ---------- ATS READINESS ---------- */
 
 function updateATS(){
+
   const checks = [];
 
-  const name = val("name");
-  const email = val("email");
-  const phone = val("phone");
-  const role = val("role") || val("headline");
-  const summary = val("summary");
-  const experienceText = data.experiences.map(x=>x.description).join(" ");
-  const projectText = data.projects.map(x=>x.description).join(" ");
+  const name =
+    val("name");
+
+  const email =
+    val("email");
+
+  const phone =
+    val("phone");
+
+  const role =
+    val("role") ||
+    val("headline");
+
+  const summary =
+    val("summary");
+
+  const experienceText =
+    data.experiences
+      .map(x=>x.description)
+      .join(" ");
+
+  const projectText =
+    data.projects
+      .map(x=>x.description)
+      .join(" ");
 
   checks.push({
+
     label:"Name is provided",
     pass:!!name
+
   });
 
   checks.push({
+
     label:"Valid email is provided",
     pass:/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+
   });
 
   checks.push({
+
     label:"Professional role/title is provided",
     pass:!!role
+
   });
 
   checks.push({
+
     label:"Professional summary is provided",
     pass:summary.length >= 50
+
   });
 
   checks.push({
+
     label:"At least 3 skills are listed",
     pass:data.skills.length >= 3
+
   });
 
   checks.push({
+
     label:"Education information is present",
-    pass:data.education.some(x=>x.degree || x.institution)
-  });
-
-  checks.push({
-    label:"Experience or project evidence is present",
-    pass:data.experiences.length > 0 || data.projects.length > 0
-  });
-
-  checks.push({
-    label:"Experience/project descriptions contain useful detail",
-    pass:(experienceText + projectText).length >= 80
-  });
-
-  checks.push({
-    label:"Achievements or measurable evidence is included",
-    pass:val("achievements").length >= 30 ||
-         /\d+%|\d+\+|\d+\s*(users|clients|projects|students|members)/i.test(experienceText)
-  });
-
-  checks.push({
-    label:"Resume has no excessive empty sections",
-    pass:(
-      name &&
-      email &&
-      role &&
-      data.skills.length &&
-      (data.education.length || data.experiences.length || data.projects.length)
+    pass:data.education.some(
+      x=>x.degree || x.institution
     )
+
   });
 
-  const score = Math.round(
-    checks.filter(x=>x.pass).length / checks.length * 100
-  );
+  checks.push({
 
-  document.getElementById("scoreNumber").textContent = score + "%";
-  document.getElementById("scoreBar").style.width = score + "%";
+    label:"Experience or project evidence is present",
+    pass:
+      data.experiences.length > 0 ||
+      data.projects.length > 0
+
+  });
+
+  checks.push({
+
+    label:"Experience/project descriptions contain useful detail",
+    pass:
+      (experienceText + projectText).length >= 80
+
+  });
+
+  checks.push({
+
+    label:"Achievements or measurable evidence is included",
+
+    pass:
+      val("achievements").length >= 30 ||
+      /\d+%|\d+\+|\d+\s*(users|clients|projects|students|members)/i
+        .test(experienceText)
+
+  });
+
+  checks.push({
+
+    label:"Resume has no excessive empty sections",
+
+    pass:
+      (
+        name &&
+        email &&
+        role &&
+        data.skills.length &&
+        (
+          data.education.length ||
+          data.experiences.length ||
+          data.projects.length
+        )
+      )
+
+  });
+
+  const score =
+    Math.round(
+      checks.filter(
+        x=>x.pass
+      ).length /
+      checks.length *
+      100
+    );
+
+  document.getElementById(
+    "scoreNumber"
+  ).textContent =
+    score + "%";
+
+  document.getElementById(
+    "scoreBar"
+  ).style.width =
+    score + "%";
 
   let message = "";
 
   if(score < 50){
-    message = "Add the missing basics before applying.";
+
+    message =
+      "Add the missing basics before applying.";
+
   }else if(score < 75){
-    message = "Good foundation. A few sections still need improvement.";
+
+    message =
+      "Good foundation. A few sections still need improvement.";
+
   }else if(score < 90){
-    message = "Strong structure. Review the remaining warnings.";
+
+    message =
+      "Strong structure. Review the remaining warnings.";
+
   }else{
-    message = "Well-structured resume. Still review it for accuracy and job relevance.";
+
+    message =
+      "Well-structured resume. Still review it for accuracy and job relevance.";
+
   }
 
-  document.getElementById("scoreMessage").textContent = message;
+  document.getElementById(
+    "scoreMessage"
+  ).textContent =
+    message;
 
-  document.getElementById("checkList").innerHTML =
-    checks.map(item=>`
-      <div class="check-item ${item.pass ? "pass":"warn"}">
-        <span>${item.pass ? "✓":"○"}</span>
-        <span>${esc(item.label)}</span>
-      </div>
-    `).join("");
+  document.getElementById(
+    "checkList"
+  ).innerHTML =
+
+    checks.map(
+      item=>`
+
+        <div class="check-item
+          ${item.pass ? "pass":"warn"}">
+
+          <span>
+            ${item.pass ? "✓":"○"}
+          </span>
+
+          <span>
+            ${esc(item.label)}
+          </span>
+
+        </div>
+
+      `
+    ).join("");
+
 }
 
 /* ---------- JOB MATCH ---------- */
 
 const STOPWORDS = new Set([
+
   "the","and","for","with","that","this","from","your","you","are",
   "our","will","have","has","into","about","their","they","them",
   "who","what","when","where","how","why","can","may","all","any",
@@ -2295,100 +4113,181 @@ const STOPWORDS = new Set([
   "responsibilities","responsibility","candidate","looking","strong",
   "good","excellent","including","such","more","than","also","but",
   "not","able","ability","must","should","would","within","through",
-  "from","over","under","other","these","those","its","it's","we",
+  "over","under","other","these","those","its","it's","we",
   "as","an","a","to","of","in","on","is","be","by","or","at"
+
 ]);
 
 function extractKeywords(text){
-  const words = text
-    .toLowerCase()
-    .replace(/[^a-z0-9+#.\- ]/g," ")
-    .split(/\s+/)
-    .map(x=>x.trim())
-    .filter(Boolean);
+
+  const words =
+
+    text
+      .toLowerCase()
+      .replace(/[^a-z0-9+#.\- ]/g," ")
+      .split(/\s+/)
+      .map(x=>x.trim())
+      .filter(Boolean);
 
   const frequency = {};
 
   words.forEach(word=>{
+
     if(
       word.length >= 3 &&
       !STOPWORDS.has(word) &&
       !/^\d+$/.test(word)
     ){
-      frequency[word] = (frequency[word] || 0) + 1;
+
+      frequency[word] =
+        (frequency[word] || 0) + 1;
+
     }
+
   });
 
   return Object.entries(frequency)
-    .sort((a,b)=>b[1]-a[1])
+
+    .sort(
+      (a,b)=>b[1]-a[1]
+    )
+
     .slice(0,30)
-    .map(x=>x[0]);
+
+    .map(
+      x=>x[0]
+    );
+
 }
 
 function updateJobMatch(){
-  const jd = val("jobDescription");
+
+  const jd =
+    val("jobDescription");
 
   if(!jd){
-    document.getElementById("matchPercent").textContent = "0%";
-    document.getElementById("matchBar").style.width = "0%";
-    document.getElementById("matchMessage").textContent =
+
+    document.getElementById(
+      "matchPercent"
+    ).textContent =
+      "0%";
+
+    document.getElementById(
+      "matchBar"
+    ).style.width =
+      "0%";
+
+    document.getElementById(
+      "matchMessage"
+    ).textContent =
       "Add a job description to compare keywords.";
-    document.getElementById("matchedKeywords").innerHTML = "";
-    document.getElementById("missingKeywords").innerHTML = "";
+
+    document.getElementById(
+      "matchedKeywords"
+    ).innerHTML = "";
+
+    document.getElementById(
+      "missingKeywords"
+    ).innerHTML = "";
+
     return;
+
   }
 
-  const keywords = extractKeywords(jd);
-  const resume = getResumeText().toLowerCase();
+  const keywords =
+    extractKeywords(jd);
 
-  const matched = keywords.filter(k=>resume.includes(k));
-  const missing = keywords.filter(k=>!resume.includes(k));
+  const resume =
+    getResumeText()
+      .toLowerCase();
 
-  const percent = keywords.length
-    ? Math.round(matched.length / keywords.length * 100)
-    : 0;
+  const matched =
+    keywords.filter(
+      k=>resume.includes(k)
+    );
 
-  document.getElementById("matchPercent").textContent = percent + "%";
-  document.getElementById("matchBar").style.width = percent + "%";
+  const missing =
+    keywords.filter(
+      k=>!resume.includes(k)
+    );
 
-  document.getElementById("matchMessage").textContent =
+  const percent =
     keywords.length
+      ? Math.round(
+          matched.length /
+          keywords.length *
+          100
+        )
+      : 0;
+
+  document.getElementById(
+    "matchPercent"
+  ).textContent =
+    percent + "%";
+
+  document.getElementById(
+    "matchBar"
+  ).style.width =
+    percent + "%";
+
+  document.getElementById(
+    "matchMessage"
+  ).textContent =
+
+    keywords.length
+
       ? `${matched.length} of ${keywords.length} extracted keywords appear in your resume.`
+
       : "Not enough recognizable keywords were found.";
 
-  document.getElementById("matchedKeywords").innerHTML =
+  document.getElementById(
+    "matchedKeywords"
+  ).innerHTML =
+
     matched.length
-      ? `<strong style="width:100%;font-size:12px">Matched</strong>` +
-        matched.map(x=>`<span class="keyword match">${esc(x)}</span>`).join("")
+
+      ? `<strong style="width:100%;font-size:12px">
+           Matched
+         </strong>` +
+
+        matched.map(
+          x=>`
+            <span class="keyword match">
+              ${esc(x)}
+            </span>
+          `
+        ).join("")
+
       : "";
 
-  document.getElementById("missingKeywords").innerHTML =
+  document.getElementById(
+    "missingKeywords"
+  ).innerHTML =
+
     missing.length
-      ? `<strong style="width:100%;font-size:12px">Potentially missing</strong>` +
-        missing.map(x=>`<span class="keyword missing">${esc(x)}</span>`).join("")
+
+      ? `<strong style="width:100%;font-size:12px">
+           Potentially missing
+         </strong>` +
+
+        missing.map(
+          x=>`
+            <span class="keyword missing">
+              ${esc(x)}
+            </span>
+          `
+        ).join("")
+
       : "";
+
 }
 
-/* ---------- UPDATE ALL ---------- */
-
-function updateAll(){
-  updatePreview();
-  updateATS();
-  updateJobMatch();
-
-  const summary = document.getElementById("summary");
-  if(summary){
-    document.getElementById("summaryCount").textContent =
-      summary.value.length;
-  }
-
-  saveData();
-}
-
-/* ---------- LOCAL STORAGE ---------- */
+/* ---------- BASIC FIELD COLLECTION ---------- */
 
 function collectBasicFields(){
+
   return {
+
     name:val("name"),
     role:val("role"),
     email:val("email"),
@@ -2404,92 +4303,543 @@ function collectBasicFields(){
     languages:val("languages"),
     additional:val("additional"),
     jobDescription:val("jobDescription")
+
   };
+
 }
 
-function saveData(){
+/* ---------- SNAPSHOT ---------- */
+
+function createSnapshot(){
+
+  return {
+
+    fields:
+      collectBasicFields(),
+
+    data:
+      JSON.parse(
+        JSON.stringify(data)
+      ),
+
+    selectedTemplate,
+
+    currentLang
+
+  };
+
+}
+
+function applySnapshot(snapshot){
+
+  if(!snapshot)
+    return;
+
+  isLoadingSnapshot =
+    true;
+
   try{
-    const payload = {
-      fields:collectBasicFields(),
-      data,
-      selectedTemplate,
-      currentLang
+
+    if(snapshot.fields){
+
+      Object.entries(
+        snapshot.fields
+      ).forEach(
+        ([id,value])=>{
+
+          const el =
+            document.getElementById(id);
+
+          if(el){
+
+            el.value =
+              value || "";
+
+          }
+
+        }
+      );
+
+    }
+
+    if(snapshot.data){
+
+      data = {
+
+        skills:
+          Array.isArray(
+            snapshot.data.skills
+          )
+            ? snapshot.data.skills
+            : [],
+
+        experiences:
+          Array.isArray(
+            snapshot.data.experiences
+          )
+            ? snapshot.data.experiences
+            : [],
+
+        education:
+          Array.isArray(
+            snapshot.data.education
+          )
+            ? snapshot.data.education
+            : [],
+
+        projects:
+          Array.isArray(
+            snapshot.data.projects
+          )
+            ? snapshot.data.projects
+            : [],
+
+        certifications:
+          Array.isArray(
+            snapshot.data.certifications
+          )
+            ? snapshot.data.certifications
+            : []
+
+      };
+
+    }
+
+    if(snapshot.selectedTemplate){
+
+      selectedTemplate =
+        snapshot.selectedTemplate;
+
+    }
+
+    if(snapshot.currentLang){
+
+      currentLang =
+        snapshot.currentLang;
+
+    }
+
+  }finally{
+
+    isLoadingSnapshot =
+      false;
+
+  }
+
+}
+
+/* ---------- SAVED RESUMES STORAGE ---------- */
+
+function getSavedResumes(){
+
+  try{
+
+    const raw =
+      localStorage.getItem(
+        STORAGE_KEYS.resumes
+      );
+
+    if(!raw)
+      return [];
+
+    const parsed =
+      JSON.parse(raw);
+
+    return Array.isArray(parsed)
+      ? parsed
+      : [];
+
+  }catch(e){
+
+    console.warn(
+      "Could not read saved resumes",
+      e
+    );
+
+    return [];
+
+  }
+
+}
+
+function writeSavedResumes(list){
+
+  try{
+
+    localStorage.setItem(
+      STORAGE_KEYS.resumes,
+      JSON.stringify(list)
+    );
+
+    return true;
+
+  }catch(e){
+
+    console.warn(
+      "Could not save resumes",
+      e
+    );
+
+    showToast(
+      "Could not save resume. Browser storage may be full."
+    );
+
+    return false;
+
+  }
+
+}
+
+/* ---------- DRAFT STORAGE ---------- */
+
+function saveDraft(){
+
+  if(isLoadingSnapshot)
+    return;
+
+  try{
+
+    const draft = {
+
+      payload:
+        createSnapshot(),
+
+      currentResumeId,
+
+      currentResumeLocked,
+
+      selectedPlan,
+
+      savedAt:
+        new Date().toISOString()
+
     };
 
     localStorage.setItem(
-      "resumeBuilderAI2",
-      JSON.stringify(payload)
+      STORAGE_KEYS.draft,
+      JSON.stringify(draft)
     );
+
   }catch(e){
-    console.warn("Local save unavailable",e);
+
+    console.warn(
+      "Draft save unavailable",
+      e
+    );
+
   }
+
 }
 
-function loadData(){
+function loadDraft(){
+
   try{
-    const raw = localStorage.getItem("resumeBuilderAI2");
 
-    if(!raw) return;
+    const raw =
+      localStorage.getItem(
+        STORAGE_KEYS.draft
+      );
 
-    const saved = JSON.parse(raw);
+    if(!raw)
+      return false;
 
-    if(saved.fields){
-      Object.entries(saved.fields).forEach(([id,value])=>{
-        const el = document.getElementById(id);
-        if(el) el.value = value || "";
-      });
-    }
+    const draft =
+      JSON.parse(raw);
 
-    if(saved.data){
-      data = {
-        skills:Array.isArray(saved.data.skills) ? saved.data.skills : [],
-        experiences:Array.isArray(saved.data.experiences) ? saved.data.experiences : [],
-        education:Array.isArray(saved.data.education) ? saved.data.education : [],
-        projects:Array.isArray(saved.data.projects) ? saved.data.projects : [],
-        certifications:Array.isArray(saved.data.certifications) ? saved.data.certifications : []
-      };
-    }
+    if(!draft.payload)
+      return false;
 
-    if(saved.selectedTemplate){
-      selectedTemplate = saved.selectedTemplate;
-    }
+    applySnapshot(
+      draft.payload
+    );
 
-    if(saved.currentLang){
-      currentLang = saved.currentLang;
-    }
+    currentResumeId =
+      draft.currentResumeId || null;
+
+    currentResumeLocked =
+      !!draft.currentResumeLocked;
+
+    selectedPlan =
+      draft.selectedPlan || "basic";
+
+    hasUnsavedChanges =
+      true;
+
+    return true;
 
   }catch(e){
-    console.warn("Could not load saved resume",e);
+
+    console.warn(
+      "Could not restore draft",
+      e
+    );
+
+    return false;
+
   }
+
 }
 
-/* ---------- RESET ---------- */
+/* ---------- MARK CHANGED ---------- */
 
-function resetAll(){
-  const yes = confirm(
-    "Reset the entire resume? This will clear the saved browser data."
+function markChanged(){
+
+  if(
+    isLoadingSnapshot ||
+    currentResumeLocked
+  ){
+
+    return;
+
+  }
+
+  hasUnsavedChanges =
+    true;
+
+  updateSaveStatus();
+
+  saveDraft();
+
+}
+
+/* ---------- UPDATE ALL ---------- */
+
+function updateAll(){
+
+  updatePreview();
+  updateATS();
+  updateJobMatch();
+
+  const summary =
+    document.getElementById(
+      "summary"
+    );
+
+  if(summary){
+
+    document.getElementById(
+      "summaryCount"
+    ).textContent =
+      summary.value.length;
+
+  }
+
+  updateSaveStatus();
+
+  if(!isLoadingSnapshot){
+
+    saveDraft();
+
+  }
+
+}
+
+/* ---------- SAVED RESUME NAME ---------- */
+
+function defaultResumeName(){
+
+  const name =
+    val("name");
+
+  const role =
+    val("role") ||
+    val("headline");
+
+  if(name && role){
+
+    return `${role} Resume — ${name}`;
+
+  }
+
+  if(role){
+
+    return `${role} Resume`;
+
+  }
+
+  if(name){
+
+    return `${name} Resume`;
+
+  }
+
+  return "My Resume";
+
+}
+
+/* ---------- SAVE MODAL ---------- */
+
+function openSaveModal(){
+
+  if(currentResumeLocked){
+
+    showToast(
+      "This resume is already finalized."
+    );
+
+    return;
+
+  }
+
+  if(!validatePersonal())
+    return;
+
+  const input =
+    document.getElementById(
+      "saveResumeName"
+    );
+
+  input.value =
+    defaultResumeName();
+
+  selectPlan(
+    selectedPlan || "basic"
   );
 
-  if(!yes) return;
+  document
+    .getElementById("saveModal")
+    .classList.add("show");
 
-  localStorage.removeItem("resumeBuilderAI2");
+  setTimeout(
+    ()=>{
+      input.focus();
+      input.select();
+    },
+    50
+  );
 
-  data = {
-    skills:[],
-    experiences:[],
-    education:[],
-    projects:[],
-    certifications:[]
+}
+
+function closeSaveModal(){
+
+  document
+    .getElementById("saveModal")
+    .classList.remove("show");
+
+}
+
+function selectPlan(plan){
+
+  if(!PRICING[plan])
+    return;
+
+  selectedPlan =
+    plan;
+
+  document
+    .getElementById(
+      "basicPriceCard"
+    )
+    .classList.toggle(
+      "selected",
+      plan === "basic"
+    );
+
+  document
+    .getElementById(
+      "professionalPriceCard"
+    )
+    .classList.toggle(
+      "selected",
+      plan === "professional"
+    );
+
+}
+
+/* ---------- FINALIZE ---------- */
+
+function finalizeResume(){
+
+  if(currentResumeLocked){
+
+    closeSaveModal();
+
+    showToast(
+      "This resume is already finalized."
+    );
+
+    return;
+
+  }
+
+  if(!validatePersonal())
+    return;
+
+  const nameInput =
+    document.getElementById(
+      "saveResumeName"
+    );
+
+  const resumeName =
+    nameInput.value.trim() ||
+    defaultResumeName();
+
+  const payload =
+    createSnapshot();
+
+  const now =
+    new Date().toISOString();
+
+  const list =
+    getSavedResumes();
+
+  let record = null;
+
+  /*
+    If editing a draft that came from a saved resume,
+    we intentionally DO NOT modify the old locked resume.
+    The current editor is treated as a new version.
+  */
+
+  record = {
+
+    id:
+      uid(),
+
+    name:
+      resumeName,
+
+    plan:
+      selectedPlan,
+
+    price:
+      PRICING[selectedPlan].price,
+
+    createdAt:
+      now,
+
+    updatedAt:
+      now,
+
+    locked:
+      true,
+
+    payload
+
   };
 
-  selectedTemplate = "modern";
+  list.unshift(record);
 
-  document.querySelectorAll("input,textarea").forEach(el=>{
-    el.value = "";
-  });
+  if(
+    !writeSavedResumes(list)
+  ){
 
-  const summaryExperience = document.getElementById("summaryExperience");
-  if(summaryExperience) summaryExperience.value = "0";
+    return;
+
+  }
+
+  currentResumeId =
+    record.id;
+
+  currentResumeLocked =
+    true;
+
+  hasUnsavedChanges =
+    false;
+
+  saveDraft();
+
+  renderAllSavedResumes();
 
   renderExperience();
   renderEducation();
@@ -2497,88 +4847,489 @@ function resetAll(){
   renderCertifications();
   renderSkills();
 
-  selectTemplate("modern");
+  setEditorLocked(true);
+
+  closeSaveModal();
+
+  showToast(
+    `Resume finalized and saved — ${PRICING[selectedPlan].name} ₹${PRICING[selectedPlan].price}.`
+  );
+
+}
+
+/* ---------- LOAD SAVED RESUME ---------- */
+
+function findSavedResume(id){
+
+  return getSavedResumes()
+    .find(
+      item=>item.id===id
+    );
+
+}
+
+function loadSavedResume(id){
+
+  const record =
+    findSavedResume(id);
+
+  if(!record){
+
+    showToast(
+      "Saved resume could not be found."
+    );
+
+    renderAllSavedResumes();
+
+    return;
+
+  }
+
+  applySnapshot(
+    record.payload
+  );
+
+  currentResumeId =
+    record.id;
+
+  currentResumeLocked =
+    true;
+
+  selectedPlan =
+    record.plan || "basic";
+
+  hasUnsavedChanges =
+    false;
+
+  currentStep =
+    0;
+
+  renderExperience();
+  renderEducation();
+  renderProjects();
+  renderCertifications();
+  renderSkills();
+
+  document
+    .querySelectorAll(".template")
+    .forEach(btn=>{
+
+      btn.classList.toggle(
+        "selected",
+        btn.dataset.template ===
+          selectedTemplate
+      );
+
+    });
+
+  setEditorLocked(true);
+
+  applyLanguage();
   goStep(0);
+  updateAll();
 
-  showToast("Resume reset successfully.");
+  saveDraft();
+
+  renderAllSavedResumes();
+
+  showToast(
+    `"${record.name}" loaded. This finalized resume is locked.`
+  );
+
 }
 
-/* ---------- PRINT / PDF ---------- */
+/* ---------- VIEW SAVED RESUME ---------- */
 
-function downloadPDF(){
-  if(!validatePersonal()) return;
+function viewSavedResume(id){
 
-  /*
-    Browser print dialog lets the user choose:
-    Destination → Save as PDF
-  */
-  window.print();
+  loadSavedResume(id);
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
 }
 
-/* ---------- SHARE ---------- */
+/* ---------- DELETE SAVED RESUME ---------- */
 
-async function shareResume(){
-  const name = val("name") || "My Resume";
-  const role = val("role") || val("headline") || "Professional";
+function deleteSavedResume(id){
+
+  const record =
+    findSavedResume(id);
+
+  if(!record)
+    return;
+
+  const yes =
+    confirm(
+      `Delete "${record.name}"?\n\nThis finalized resume will be permanently removed from this browser.`
+    );
+
+  if(!yes)
+    return;
+
+  const list =
+    getSavedResumes()
+      .filter(
+        item=>item.id!==id
+      );
+
+  if(
+    !writeSavedResumes(list)
+  ){
+
+    return;
+
+  }
+
+  if(
+    currentResumeId === id
+  ){
+
+    createNewResume(
+      true
+    );
+
+  }
+
+  renderAllSavedResumes();
+
+  showToast(
+    "Saved resume deleted."
+  );
+
+}
+
+/* ---------- DUPLICATE ---------- */
+
+/*
+  Because finalized resumes are locked,
+  Duplicate does NOT silently unlock the old resume.
+  It creates a fresh editable draft from the selected
+  saved resume. User can modify it and finalize it as
+  a new paid resume later.
+*/
+
+function duplicateSavedResume(id){
+
+  const record =
+    findSavedResume(id);
+
+  if(!record)
+    return;
+
+  const yes =
+    confirm(
+      `Create a new editable version from "${record.name}"?\n\nThe original finalized resume will remain unchanged.`
+    );
+
+  if(!yes)
+    return;
+
+  applySnapshot(
+    record.payload
+  );
+
+  currentResumeId =
+    null;
+
+  currentResumeLocked =
+    false;
+
+  selectedPlan =
+    record.plan || "basic";
+
+  hasUnsavedChanges =
+    true;
+
+  currentStep =
+    0;
+
+  renderExperience();
+  renderEducation();
+  renderProjects();
+  renderCertifications();
+  renderSkills();
+
+  document
+    .querySelectorAll(".template")
+    .forEach(btn=>{
+
+      btn.classList.toggle(
+        "selected",
+        btn.dataset.template ===
+          selectedTemplate
+      );
+
+    });
+
+  setEditorLocked(false);
+
+  applyLanguage();
+  goStep(0);
+  updateAll();
+
+  saveDraft();
+
+  showToast(
+    "New editable version created. Review it and finalize when ready."
+  );
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+/* ---------- SHARE SAVED RESUME ---------- */
+
+function buildShareTextFromRecord(record){
+
+  const fields =
+    record &&
+    record.payload &&
+    record.payload.fields
+      ? record.payload.fields
+      : {};
+
+  const name =
+    fields.name ||
+    record.name ||
+    "My Resume";
+
+  const role =
+    fields.role ||
+    fields.headline ||
+    "Professional";
+
+  return (
+
+    `${name} — ${role}\n\n` +
+
+    `Resume created with ${COMPANY.name}.\n` +
+
+    `Resume type: ${PRICING[record.plan || "basic"].name}.\n\n` +
+
+    `This is a finalized resume version.`
+
+  );
+
+}
+
+async function shareSavedResume(id){
+
+  const record =
+    findSavedResume(id);
+
+  if(!record){
+
+    showToast(
+      "Saved resume could not be found."
+    );
+
+    return;
+
+  }
 
   const text =
-    `${name} — ${role}\n\n` +
-    `Resume created with ResumeBuilder AI 2.0.\n` +
-    `ATS readiness and job keyword checks are included.\n\n` +
-    `This version is generated locally in the browser.`;
+    buildShareTextFromRecord(
+      record
+    );
 
   try{
+
     if(navigator.share){
+
       await navigator.share({
-        title:`${name} Resume`,
+
+        title:
+          `${record.name} — Resume`,
+
         text
+
       });
 
       return;
+
     }
+
   }catch(e){
-    if(e.name === "AbortError") return;
+
+    if(
+      e &&
+      e.name === "AbortError"
+    ){
+
+      return;
+
+    }
+
   }
 
   const whatsapp =
     "https://wa.me/?text=" +
     encodeURIComponent(text);
 
-  window.open(whatsapp,"_blank","noopener,noreferrer");
+  window.open(
+    whatsapp,
+    "_blank",
+    "noopener,noreferrer"
+  );
+
 }
 
-/* ---------- INPUT EVENTS ---------- */
+/* ---------- SAVED RESUME LIST ---------- */
 
-function setupEvents(){
-  document.addEventListener("input",e=>{
-    if(
-      e.target.matches("input,textarea,select") &&
-      !e.target.closest("#experienceList") &&
-      !e.target.closest("#educationList") &&
-      !e.target.closest("#projectList") &&
-      !e.target.closest("#certificationList")
-    ){
-      updateAll();
-    }
+function renderAllSavedResumes(){
 
-    if(e.target.id === "jobDescription"){
-      updateJobMatch();
-    }
-  });
+  const box =
+    document.getElementById(
+      "savedResumeList"
+    );
 
-  document.getElementById("skillInput")
-    .addEventListener("keydown",e=>{
-      if(e.key === "Enter"){
-        e.preventDefault();
-        addSkill();
+  const countBox =
+    document.getElementById(
+      "savedCount"
+    );
+
+  const list =
+    getSavedResumes();
+
+  countBox.textContent =
+    `${list.length} saved resume${list.length===1 ? "" : "s"}`;
+
+  if(!list.length){
+
+    box.innerHTML = `
+
+      <div class="empty">
+
+        <div style="font-size:24px;margin-bottom:8px">
+          📄
+        </div>
+
+        <strong>
+          No finalized resumes yet
+        </strong>
+
+        <div class="hint" style="margin-top:6px">
+          Create your resume, review it carefully,
+          then use “Finalize & Save”.
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  box.innerHTML =
+    `<div class="saved-list">` +
+
+    list.map(
+      record=>{
+
+        const isActive =
+          record.id ===
+          currentResumeId;
+
+        const plan =
+          PRICING[
+            record.plan || "basic"
+          ] ||
+          PRICING.basic;
+
+        return `
+
+          <div
+            class="saved-card
+              ${isActive ? "active":""}">
+
+            <div class="saved-info">
+
+              <div class="saved-name">
+                ${esc(record.name)}
+              </div>
+
+              <div class="saved-meta">
+
+                ${esc(plan.name)}
+                • ₹${esc(plan.price)}
+                • Saved ${esc(
+                    formatDate(
+                      record.updatedAt ||
+                      record.createdAt
+                    )
+                  )}
+
+              </div>
+
+              <div class="saved-status">
+                🔒 Finalized
+              </div>
+
+            </div>
+
+            <div class="saved-actions">
+
+              <button
+                class="small-btn"
+                onclick="viewSavedResume('${record.id}')">
+                View
+              </button>
+
+              <button
+                class="small-btn"
+                onclick="duplicateSavedResume('${record.id}')">
+                Duplicate
+              </button>
+
+              <button
+                class="small-btn"
+                onclick="shareSavedResume('${record.id}')">
+                ↗ Share
+              </button>
+
+              <button
+                class="small-btn"
+                onclick="downloadSavedPDF('${record.id}')">
+                🖨 PDF
+              </button>
+
+              <button
+                class="small-btn"
+                onclick="deleteSavedResume('${record.id}')">
+                🗑 Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
       }
-    });
+    ).join("") +
+
+    `</div>`;
+
 }
 
-/* ---------- INIT ---------- */
+/* ---------- LOAD RECORD FOR PRINT ---------- */
 
-function init(){
-  loadData();
+function loadRecordIntoTemporaryEditor(record){
+
+  applySnapshot(
+    record.payload
+  );
+
+  selectedTemplate =
+    record.payload.selectedTemplate ||
+    "modern";
 
   renderExperience();
   renderEducation();
@@ -2586,20 +5337,568 @@ function init(){
   renderCertifications();
   renderSkills();
 
-  document.querySelectorAll(".template").forEach(btn=>{
-    btn.classList.toggle(
-      "selected",
-      btn.dataset.template === selectedTemplate
-    );
-  });
+  updatePreview();
 
-  setupEvents();
+}
+
+function downloadSavedPDF(id){
+
+  const record =
+    findSavedResume(id);
+
+  if(!record){
+
+    showToast(
+      "Saved resume could not be found."
+    );
+
+    return;
+
+  }
+
+  /*
+    We temporarily load the selected finalized
+    resume for printing, but keep the saved record
+    intact.
+  */
+
+  const previous =
+    createSnapshot();
+
+  const previousId =
+    currentResumeId;
+
+  const previousLocked =
+    currentResumeLocked;
+
+  const previousPlan =
+    selectedPlan;
+
+  loadRecordIntoTemporaryEditor(
+    record
+  );
+
+  currentResumeId =
+    record.id;
+
+  currentResumeLocked =
+    true;
+
+  selectedPlan =
+    record.plan || "basic";
+
+  setEditorLocked(true);
+
+  setTimeout(
+    ()=>{
+
+      window.print();
+
+      /*
+        Browser print dialog is asynchronous.
+        The editor is restored after the print
+        request is made.
+      */
+
+      setTimeout(
+        ()=>{
+
+          applySnapshot(
+            previous
+          );
+
+          currentResumeId =
+            previousId;
+
+          currentResumeLocked =
+            previousLocked;
+
+          selectedPlan =
+            previousPlan;
+
+          renderExperience();
+          renderEducation();
+          renderProjects();
+          renderCertifications();
+          renderSkills();
+
+          setEditorLocked(
+            currentResumeLocked
+          );
+
+          updateAll();
+
+        },
+        700
+      );
+
+    },
+    100
+  );
+
+}
+
+/* ---------- NEW RESUME ---------- */
+
+function createNewResume(skipConfirm=false){
+
+  if(
+    !skipConfirm &&
+    hasUnsavedChanges &&
+    !currentResumeLocked
+  ){
+
+    const yes =
+      confirm(
+        "You have an unsaved draft.\n\nStart a new resume anyway?"
+      );
+
+    if(!yes)
+      return;
+
+  }
+
+  currentResumeId =
+    null;
+
+  currentResumeLocked =
+    false;
+
+  selectedPlan =
+    "basic";
+
+  hasUnsavedChanges =
+    false;
+
+  currentStep =
+    0;
+
+  data = {
+
+    skills:[],
+    experiences:[],
+    education:[],
+    projects:[],
+    certifications:[]
+
+  };
+
+  selectedTemplate =
+    "modern";
+
+  clearFields();
+
+  renderExperience();
+  renderEducation();
+  renderProjects();
+  renderCertifications();
+  renderSkills();
+
+  document
+    .querySelectorAll(".template")
+    .forEach(btn=>{
+
+      btn.classList.toggle(
+        "selected",
+        btn.dataset.template ===
+          "modern"
+      );
+
+    });
+
+  setEditorLocked(false);
+
   applyLanguage();
   goStep(0);
   updateAll();
+
+  saveDraft();
+
+  renderAllSavedResumes();
+
+  showToast(
+    "New resume started. Your saved resumes are safe."
+  );
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
 }
 
-window.addEventListener("load",init);
+/* ---------- CLEAR CURRENT EDITOR ---------- */
+
+function clearFields(){
+
+  document
+    .querySelectorAll(
+      "input,textarea"
+    )
+    .forEach(el=>{
+
+      /*
+        Keep skill input empty as well.
+      */
+
+      el.value = "";
+
+    });
+
+  const summaryExperience =
+    document.getElementById(
+      "summaryExperience"
+    );
+
+  if(summaryExperience){
+
+    summaryExperience.value =
+      "0";
+
+  }
+
+}
+
+function resetEditor(){
+
+  const yes =
+    confirm(
+      "Reset the current editor?\n\nYour saved finalized resumes will NOT be deleted."
+    );
+
+  if(!yes)
+    return;
+
+  createNewResume(
+    true
+  );
+
+  showToast(
+    "Current editor reset. Saved resumes remain safe."
+  );
+
+}
+
+/* ---------- PDF ---------- */
+
+function downloadPDF(){
+
+  if(!validatePersonal())
+    return;
+
+  /*
+    Browser print dialog:
+    Destination → Save as PDF
+  */
+
+  window.print();
+
+}
+
+/* ---------- SHARE CURRENT ---------- */
+
+async function shareResume(){
+
+  const name =
+    val("name") ||
+    "My Resume";
+
+  const role =
+    val("role") ||
+    val("headline") ||
+    "Professional";
+
+  const text =
+
+    `${name} — ${role}\n\n` +
+
+    `Resume created with ${COMPANY.name}.\n` +
+
+    `${
+      currentResumeLocked
+        ? "This is a finalized resume version."
+        : "This is a resume draft."
+    }`;
+
+  try{
+
+    if(navigator.share){
+
+      await navigator.share({
+
+        title:
+          `${name} Resume`,
+
+        text
+
+      });
+
+      return;
+
+    }
+
+  }catch(e){
+
+    if(
+      e &&
+      e.name === "AbortError"
+    ){
+
+      return;
+
+    }
+
+  }
+
+  const whatsapp =
+    "https://wa.me/?text=" +
+    encodeURIComponent(text);
+
+  window.open(
+    whatsapp,
+    "_blank",
+    "noopener,noreferrer"
+  );
+
+}
+
+/* ---------- INPUT EVENTS ---------- */
+
+function setupEvents(){
+
+  document.addEventListener(
+    "input",
+    e=>{
+
+      if(
+        currentResumeLocked
+      ){
+
+        return;
+
+      }
+
+      if(
+        e.target.matches(
+          "input,textarea,select"
+        )
+      ){
+
+        if(
+          e.target.closest(
+            "#experienceList"
+          ) ||
+          e.target.closest(
+            "#educationList"
+          ) ||
+          e.target.closest(
+            "#projectList"
+          ) ||
+          e.target.closest(
+            "#certificationList"
+          )
+        ){
+
+          /*
+            Those dynamic fields have
+            their own update handlers.
+          */
+
+        }else{
+
+          markChanged();
+          updateAll();
+
+        }
+
+      }
+
+      if(
+        e.target.id ===
+        "jobDescription"
+      ){
+
+        updateJobMatch();
+
+      }
+
+    }
+  );
+
+  document.getElementById(
+    "skillInput"
+  ).addEventListener(
+    "keydown",
+    e=>{
+
+      if(
+        e.key === "Enter"
+      ){
+
+        e.preventDefault();
+
+        addSkill();
+
+      }
+
+    }
+  );
+
+  document
+    .getElementById("saveModal")
+    .addEventListener(
+      "click",
+      e=>{
+
+        if(
+          e.target.id ===
+          "saveModal"
+        ){
+
+          closeSaveModal();
+
+        }
+
+      }
+    );
+
+  document.addEventListener(
+    "keydown",
+    e=>{
+
+      if(
+        e.key === "Escape"
+      ){
+
+        closeSaveModal();
+
+      }
+
+    }
+  );
+
+}
+
+/* ---------- BEFORE LEAVE ---------- */
+
+window.addEventListener(
+  "beforeunload",
+  e=>{
+
+    if(
+      hasUnsavedChanges &&
+      !currentResumeLocked
+    ){
+
+      saveDraft();
+
+      /*
+        We don't force a browser warning because
+        the draft is already stored locally.
+      */
+
+    }
+
+  }
+);
+
+/* ---------- INIT ---------- */
+
+function init(){
+
+  const restored =
+    loadDraft();
+
+  if(!restored){
+
+    data = {
+
+      skills:[],
+      experiences:[],
+      education:[],
+      projects:[],
+      certifications:[]
+
+    };
+
+    currentResumeId =
+      null;
+
+    currentResumeLocked =
+      false;
+
+    selectedPlan =
+      "basic";
+
+    selectedTemplate =
+      "modern";
+
+    currentLang =
+      "en";
+
+    hasUnsavedChanges =
+      false;
+
+  }
+
+  renderExperience();
+  renderEducation();
+  renderProjects();
+  renderCertifications();
+  renderSkills();
+
+  document
+    .querySelectorAll(".template")
+    .forEach(btn=>{
+
+      btn.classList.toggle(
+        "selected",
+        btn.dataset.template ===
+          selectedTemplate
+      );
+
+    });
+
+  setupEvents();
+
+  applyLanguage();
+
+  goStep(
+    currentStep
+  );
+
+  setEditorLocked(
+    currentResumeLocked
+  );
+
+  updateAll();
+
+  renderAllSavedResumes();
+
+  if(restored){
+
+    if(currentResumeLocked){
+
+      showToast(
+        "Your finalized resume was restored."
+      );
+
+    }else{
+
+      showToast(
+        "Your unsaved draft was restored."
+      );
+
+    }
+
+  }
+
+}
+
+window.addEventListener(
+  "load",
+  init
+);
 
 </script>
 
